@@ -33,6 +33,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 \newpage
 
+
+
 # Introduction
 
 These notes should help you get started with the statistics software R, guide you through the practical part of the course and provide additional information on selected topics. Before you continue reading, make sure you have R and R Studio installed on your computer. Try to use R as an calculator as shown in the lecture slides and try to get yourself accustomed to the different windows in the R Studio environment. No prior knowledge about R is necessary and once everything is up and running you can dive right in.
@@ -64,7 +66,7 @@ scale_colour_discrete <- function(...) {
 
 
 
-# Visualizations with ggplot2 and base R
+# Visualizations with ggplot2 and base R {.tabset .tabset-pills}
 
 ## GGplot 2
 We start with some examples of how to visulaize data quickly and easily. This should show you how to produce high quality visulaizations using R and motivate you to learn more about programming and data analysis with R. 
@@ -210,7 +212,7 @@ Instead of using a data frame, we have created vectors of variables and used the
 
 By now you should see that R is very versatile and can be used for much more than simply doing statistics. This course will teach you the basics of R so that you can start using it for your research projects. An essential part is that  you should also learn how to find and use additional resources, such as the help function in R, books, the internet, etc. Nobody knows all of R - it is an ever growing community endevaour and looking up how things work, which functions or packages are available, or how other people solved a problem is an essential part of learning to be proficient in R.
 
-# Working with data frames
+# Working with data frames {.tabset .tabset-pills}
 
 ## Loading datasets
 How to we feed R our data? Of course, we can just type it into the console, a bit like in the previous base R graphics example. For large data sets (or rather anythign that is not an eytremely small data set)  this is not practical. We want to load our data from a file, which makes our analysis easily reproducible if we share data and R scripts with someone. First we need to make sure R knows where our working directory is, using the function *setwd* (set working directory):
@@ -362,7 +364,7 @@ Find all flights that
 
 
 
-# Calculating Descriptive Statistics 
+# Calculating Descriptive Statistics  {.tabset .tabset-pills}
 
 We continue using the stickleback data set and calcualte some statistics on it. A simple way to get a quick overview about the properties of your data frame is using the funciton *summary*:
 
@@ -446,7 +448,7 @@ ggplot(data=filter(stickleback,genotype == "mm")) +
 
 
 
-# A bit of workflow
+# A bit of workflow {.tabset .tabset-pills}
 In this part you will see how to explore a data set and store your analysis in a reproducible and reusable way.  
 
 ## What is an R script
@@ -609,7 +611,7 @@ head(stickleback3)
 
 
 
-# Working with Distributions and random variables
+# Working with Distributions and random variables {.tabset .tabset-pills}
 
 ## Functions to work with probaility distributions
 R has a set of functions to work with distirbutions and random numbres. Have a look at 
@@ -840,7 +842,7 @@ lines(x,y)
 
 
 
-# Hypothesis Tests
+# Hypothesis Tests {.tabset .tabset-pills}
 
 In this chpater we will learn how to do hypotehsis tests in R. This is very simple, as you will see - often a single line of code is sufficient for conducting a test.
 
@@ -1084,7 +1086,7 @@ t.test(squamosalHornLength ~ Survival, data = lizard,var.equal = TRUE)
 
 
 
-# Deviations from Normailty
+# Deviations from Normailty {.tabset .tabset-pills}
 
 ## QQ Plots and Transformations
 We investigate the ratio of biomass between marine reserves and non-reserve control areas.
@@ -1342,7 +1344,7 @@ anova(algaeNoInteractModel, algaeFullModel)
 ```
 
 
-
+{.tabset .tabset-pills}
 # Linear Regression
 
 We test the null hypothesis of zero regression slope. The data are from an experiment investigating the effect of plant species diversity on the stability of plant biomass production.
@@ -1390,7 +1392,7 @@ plot(prairieRegression$fitted.values,prairieRegression$residuals,xlab="fitted",y
 ```
 
 
-
+{.tabset .tabset-pills}
 # Additional notes to the course slides
 ## Law of total probability
 
@@ -1455,8 +1457,9 @@ sum(die.2>die.1)/10000
 
 ```
 
+{.tabset .tabset-pills}
 
-# Exercises
+# Exercises {.tabset .tabset-dropdown}
 
 ## Week 1 (23.02.2022) 
 
@@ -1873,7 +1876,7 @@ Use the stickleback data set yet again. Perform a t.test for each comparison of 
 
 
 
-## Week 11 (12.05.2021)
+## Week 11 
 
 ### Exercise 24
 A forensic pathologist wants to know whether
