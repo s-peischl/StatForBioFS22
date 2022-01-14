@@ -1,10 +1,17 @@
 ---
 title: "Statistik für Biologie FS 2022"
 author: "Stephan Peischl"
-output:
-  html_document:
-    toc: yes
-    toc_float: yes
+
+output:  
+
+  rmdformats::downcute:
+    self_contained: true
+    thumbnails: true
+    lightbox: true
+    gallery: false
+    highlight: tango
+   
+    
   pdf_document:
     df_print: kable
     fig_caption: yes
@@ -1450,7 +1457,7 @@ sum(die.2>die.1)/10000
 
 # Exercises
 
-## Week 1 (23.02.2022)
+## Week 1 (23.02.2022) {.tabset .tabset-fade .tabset-pills}
 
 #### Exercise 1
 
