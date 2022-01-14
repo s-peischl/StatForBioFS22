@@ -1,18 +1,13 @@
 ---
 title: "Statistik für Biologie FS 2022"
 author: "Stephan Peischl"
-
-
-output:  
-
+output:
   rmdformats::robobook:
-    self_contained: true
-    thumbnails: true
-    lightbox: true
-    gallery: false
+    gallery: yes
     highlight: tango
-   
-    
+    lightbox: yes
+    self_contained: yes
+    thumbnails: yes
   pdf_document:
     df_print: kable
     fig_caption: yes
@@ -21,12 +16,15 @@ output:
     highlight: tango
     number_sections: yes
     toc: yes
+  html_document:
+    toc: yes
+  tufte::tufte_book: default
+  tufte::tufte_handout: default
   word_document:
     toc: yes
-
 ---
 
-```{r setup, include=FALSE}
+```{r,fig.margin = TRUE,setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -42,7 +40,7 @@ These notes should help you get started with the statistics software R, guide yo
 We start by loading some relevant packages for this course. An R package is a collection of functions, data, and documentation that extends the capabilities of base R. 
 
 
-```{r libraries.eval,echo = TRUE,results='hide', message=F, warning=F}
+```{r,fig.margin = TRUE,libraries.eval,echo = TRUE,results='hide', message=F, warning=F}
 # make sure you have the packages installed using 
 # install.packages(packagename)
 
@@ -66,7 +64,7 @@ scale_colour_discrete <- function(...) {
 
 
 
-# Visualizations with ggplot2 and base R {.tabset .tabset-pills}
+# Visualizations with ggplot2 and base R
 
 ## GGplot 2
 We start with some examples of how to visulaize data quickly and easily. This should show you how to produce high quality visulaizations using R and motivate you to learn more about programming and data analysis with R. 
@@ -75,12 +73,12 @@ R has several systems for making graphs, and I have chosen to start with ggplot2
 
 If you like to learn more about the theoretical underpinnings of ggplot2 before you start, I would recommend reading "The Layered Grammar of Graphics", http://vita.had.co.nz/papers/layered-grammar.pdf.
 
-### The MPG dataset
+## The MPG dataset
 Let us use our first graph to answer a question: Do cars with big engines use more fuel than cars with small engines? What does the relationship between engine size and fuel efficiency look like? Is it positive? Negative? Linear? Nonlinear?
 
 We can find an answer with the mpg data set found in ggplot2 (aka ggplot2::mpg). A data frame is the R data format to store data in a spreadsheet: a rectangular collection of variables (in the columns) and observations (in the rows). The data frame mpg contains observations collected by the US Environmental Protection Agency on 38 models of car.
 
-```{r}
+```{r,fig.margin = TRUE}
 # the command head() shos us the first few rows of the data set to 
 # get an overview of what is stored in our dataset
 
@@ -104,11 +102,11 @@ To learn more about mpg, open its help page by running ?mpg. in the next seciton
 
 
 
-### The grammar of ggplot2
+## The grammar of ggplot2
 In general you begin a plot with the function *ggplot()*. ggplot() creates a coordinate system that you can add layers to. The first argument of ggplot() is the dataset to use in the graph. For instance, typing ggplot(data = mpg)
 into the console creates an empty graph (which is boring so it is not shown here). You can now add layers to your plot. For example, the function geom_point() adds a layer of points to your plot, thus creating  a scatterplot.
 
-```,{r,fig.align='center',}
+```{r,fig.margin = TRUE,fig.align='center',}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy)) 
 ```
@@ -119,7 +117,7 @@ Each geom function in ggplot2 takes a mapping argument. This defines how variabl
 
 Next, we use a different theme beacuse this gray background in the standard design is ugly.
 
-```,{r,fig.align='center',mileage2}
+```{r,fig.margin = TRUE,fig.align='center',mileage2}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy)) +
   theme_classic()
@@ -137,14 +135,14 @@ We will explain each part step by step in examples. The DATA argument should be 
 The second part, GEOM_FUNCTION, specifies what kind of plot you want. As mentioned above *geom_point* gives you a classic scatter plot. Many other such funtions exist and we will encounter some of them. 
 
 Finally, MAPPING specifies which variables hould be plotted. We ussually specify this with an aesthetics mapping of the form *mapping = aes(x = ..., y =...)* to deterimne the variables that give us the x- and y-coordinates. We can however also change the aesthetics of our plot in various way, for instance by giving data points different colors that indicate the value of a third variable:  
-```,{r,fig.align='center',mileage_aes}
+```{r,fig.margin = TRUE,fig.align='center',mileage_aes}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy,color = class)) +
   theme_classic()
 ```
 
 Another important option is to set a clor manually:
-```{r mileage_aes_2}
+```{r,fig.margin = TRUE,mileage_aes_2}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy), color = "blue") +
   theme_classic()
@@ -152,7 +150,7 @@ ggplot(data = mpg) +
 
 As a final remark, you can also create a plot, store it in a variable and then explore themes after that:
 
-```{r mileage_aes_themes}
+```{r,fig.margin = TRUE,mileage_aes_themes}
 p = ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy), color = "blue") 
 
@@ -162,7 +160,7 @@ p+theme_dark()
 
 
 We now set our prefered them globally, so we do not need to specifiy it all the time:
-```{r}
+```{r,fig.margin = TRUE}
 theme_set(theme_classic())
 ```
 
@@ -170,7 +168,7 @@ theme_set(theme_classic())
 
 Base R refers to the standard R functions. While ggplot allows us to make sophisticated graphs very quickly, I find that in some situations base R is just as good or even better. Let us recreate the same plot as before:
 
-```{r}
+```{r,fig.margin = TRUE}
 plot(mpg$displ,mpg$hwy) 
 ```
  
@@ -179,14 +177,15 @@ Try typing the name of a dataframe, followed by the $ operator in RStudio; it sh
 
 We can alos add stuff to this plot, change colors, and pretty much everything else we would like to. A quick look at the help function should give you an overview about the scope of the function plot and it's parameters. For instance, have a look at the following plot, where I  make a scatterplot and modifiy the appearance of the symbols, add some labels and a title, and then add a horizontal line at the value of the median fuel efficiency:
 
-```{r}
-plot(mpg$displ,mpg$hwy,pch=16,col="darkblue",xlab="displ",ylab="hwy", main ="a scatterplot")
+```{r,fig.margin = TRUE}
+plot(mpg$displ,mpg$hwy,pch=16,col="darkblue",
+     xlab="displ",ylab="hwy", main ="a scatterplot")
 abline(h = median(mpg$hwy))
 ```
 
 When working with data frames, ggplot may seem more attractive and easy to use than base R functions, simply because many steps are automated. You may want to try color-coding the different points according to the varibale class, just as we did before. Then try to add a legend (look up the function *legend* in the R help). You will find out that it may be a bit tedious to put all this things together. However, it also gives you a lot of control about the final looks of your figure once you have figured out what you want and how you get it. Another advantge of base R functions is that you are not restircted to the data frame format, which often makes things easier. For instance, consider this plot:
 
-```{r}
+```{r,fig.margin = TRUE}
 x=seq(0,7,by=0.1)   
 # x = (0,0.1,0.2,0.3, ... ,6.9,7)
 y=sin(x)
@@ -212,23 +211,23 @@ Instead of using a data frame, we have created vectors of variables and used the
 
 By now you should see that R is very versatile and can be used for much more than simply doing statistics. This course will teach you the basics of R so that you can start using it for your research projects. An essential part is that  you should also learn how to find and use additional resources, such as the help function in R, books, the internet, etc. Nobody knows all of R - it is an ever growing community endevaour and looking up how things work, which functions or packages are available, or how other people solved a problem is an essential part of learning to be proficient in R.
 
-# Working with data frames {.tabset .tabset-pills}
 
+# Working with data frames 
 ## Loading datasets
 How to we feed R our data? Of course, we can just type it into the console, a bit like in the previous base R graphics example. For large data sets (or rather anythign that is not an eytremely small data set)  this is not practical. We want to load our data from a file, which makes our analysis easily reproducible if we share data and R scripts with someone. First we need to make sure R knows where our working directory is, using the function *setwd* (set working directory):
-```{r}
+```{r,fig.margin = TRUE}
 setwd("/Users/stephan/Dropbox/Teaching/BlogdownPages/StatForBioFS22")
 ```
 If you want to check your current working directory, you can do this with *getwd()*.
 
 I use a dataset about the number of plates on sticklebacks. You can find this dataset (and many others) on ilias. We can load a dataset using the function *read.csv* and store it in the variable stickleback
-```{r}
+```{r,fig.margin = TRUE}
 stickleback = read.csv("chap03e3SticklebackPlates.csv")
 ```
 
 The variable *stickleback* now contains a so called data frame.  We can have a quick summary of the content of this data frame using the command *str* (short for *STR*ucture):
 
-```{r}
+```{r,fig.margin = TRUE}
 str(stickleback)
 ```
 
@@ -237,7 +236,7 @@ We can see form the output that we have 344 observations (= sample size) and for
 We used the function *read.csv* because our data is stored in the CSV format (short for *c*omma *s*eperated *v*alues - open the file in a text editor to see what that means). CSV is a common format and you can export your data from software like Excel in that format. Of course, R provides functions for other formats as well or you an use the read.table() function where you can specify how the data should be read and transformed into a data frame. 
 
 Let us use our ggplot skills to create a nice figure that visualizes our data set. For this we introduce the fucntion *geom_bar()* which allows us to make a bar plot of the number of plates per indivudal, colored by genotype:
-```{r}
+```{r,fig.margin = TRUE}
 ggplot(data = stickleback) + 
   geom_bar(mapping = aes(x = plates,color=genotype)) + 
   theme_classic()
@@ -245,7 +244,7 @@ ggplot(data = stickleback) +
 
 This figure is a bit messy. A better way would be to show the distribution for each genotype in its own window. This can be done using the function *facet_wrap*. As before, we can simply add this to our ggplot command:
 
-```{r}
+```{r,fig.margin = TRUE}
 ggplot(data = stickleback) + 
   geom_bar(mapping = aes(x = plates),fill="darkred") + 
   facet_wrap(~genotype,nrow = 3) +
@@ -257,15 +256,15 @@ We used a new symbol here: the ~. This is part of an R object called formula and
 
 ## Manipulating data frames
 A data frame is essentially a spreadsheet or a table (or rather a matrix). Therfore, we acess each column or each row, if we want to. This can be done using the *[,]* symbols. The element in row 3 and column 5 is given by:
-```{r}
+```{r,fig.margin = TRUE}
 stickleback[3,5]
 ```
 the whole 3rd column can be accesses by 
-```{r}
+```{r,fig.margin = TRUE}
 stickleback[,3]
 ```
 and the 5th row by
-```{r}
+```{r,fig.margin = TRUE}
 stickleback[5,]
 ```
 
@@ -273,13 +272,13 @@ stickleback[5,]
 Note that stickleback[[,3]] gives you all measurement of the 3rd variable in our dataframe and is hence equivalent to stickleback$genotype. The vector stickleback[5,] on the other hand gives you a vector with the 3 measured values of the 5 th individual. 
 
 We can also use this way of accessing elements to find elements of a certain type, for instance, fi we want to know the genotype of all individuals with more then 30 plates, we can get this in the following way:
-```{r results = "hide"}
+```{r,fig.margin = TRUE,results = "hide"}
 stickleback[stickleback$plates>20,3]
 ```
 Try to understand what is happening here by teasing apart and investigating the differnt parts of this (nested) command. What would happen if you removed the *stickleback$plates>20* from the command, or the *3*. 
 
 A slightly more elegant way to get this is by using the function *filter* (make sure you have the package dyplr loaded!):
-```{r results = "hide"}
+```{r,fig.margin = TRUE,results = "hide"}
 filter(stickleback,plates>20)
 ```
 which gives ou a data frame with only the individuals that satisfy the condition set in the argument.
@@ -287,7 +286,7 @@ which gives ou a data frame with only the individuals that satisfy the condition
 ## Adding variables to data frames 
 
 Sometimes we wish to extend our dataframe with calcualtions we did during our analysis or with additional measurements. This can be done with the function *mutate()*. It simply adds new columns at the end of your dataset. Let's say we want to identify which indivduals have fewer or more plates as comapred to the global mean:
-```{r}
+```{r,fig.margin = TRUE}
 diff.to.mean = stickleback$plates - mean(stickleback$plates)
 stickleback2 = mutate(stickleback,difference = diff.to.mean)
 head(stickleback2)
@@ -297,12 +296,12 @@ head(stickleback2)
 
 We have alreaddy seen how to look at a subset of your data frame using indexing. Here is another slightly more elegant way of doing this, especially when many conditions are combined over multiple variables.  For instance, what if we want to consider only stickleback with more than 20 plates:
 
-```{r}
+```{r,fig.margin = TRUE}
 head(subset(stickleback, plates>20))
 
 ```
 We could now compare how the disitrbution of genotypes changes if we condition on more than 10 plates:
-```{r}
+```{r,fig.margin = TRUE}
 ggplot(data = subset(stickleback, plates>20)) + 
   geom_bar(mapping= aes(x = genotype)) +
   labs(title="Stickleback with more than 20 plates",
@@ -315,18 +314,18 @@ ggplot(data = stickleback) +
   
 ```
 There are a few *mm* genotypes with more than 20 plates. But how many?
-```{r}
+```{r,fig.margin = TRUE}
 subset(stickleback,plates > 20 & genotype == "mm")
 
 ```
 
 It turns out there are exactly two: one with 37 plates and one with 22. We have used logical operators here: "&" means that both conditions need to be satisfied. In contrast, try to see what the symbol " | " means:
-```{r}
+```{r,fig.margin = TRUE}
 head(subset(stickleback,plates > 20  |  genotype == "mm"))
 ```
 
 You may have guessed it already, the " | " represetns the logical "or" command, indicating that either of the two conditions needs to be satisfied. Note that for logical comparions we use the "==" and not the "=" symbol, which is reserved for assignments. What is the difference? Try it:
-```{r}
+```{r,fig.margin = TRUE}
 a = 5
 
 a == 5
@@ -337,12 +336,12 @@ a == 6
 We can also use the symbols < (smaller), > (larger), <= (smaller or equal), >= (larger or equal), != (not equal) and combine them into logical statements.
 
 
-### *Practice Questions:*
+## *Practice Questions:*
 
 + Add a new varaible to the stickleback data frame that contains the difference between plate number and the mean plate number for that individuals genotype.
 
  + Load the flights dataset:
-```{r}
+```{r,fig.margin = TRUE}
 library(nycflights13)
 ```
 Find all flights that
@@ -364,30 +363,29 @@ Find all flights that
 
 
 
-# Calculating Descriptive Statistics  {.tabset .tabset-pills}
+## Calculating Descriptive Statistics  
+We continue using the stickleback data set and calculate some statistics on it. A simple way to get a quick overview about the properties of your data frame is using the funciton *summary*:
 
-We continue using the stickleback data set and calcualte some statistics on it. A simple way to get a quick overview about the properties of your data frame is using the funciton *summary*:
-
-```{r}
+```{r,fig.margin = TRUE}
 summary(stickleback)
 ```
 
 If you want to calcualte a specific statistic, like the mean of a variable, this can be done easily:
 
-```{r}
+```{r,fig.margin = TRUE}
 mean(stickleback$plates)
 ```
 
 You may have noticed that we have no calcualted the mean number of plates for *ALL* fish in our data set. What if we want to calcualte the number of plates for a specific genotype? We can use the function filter:
 
-```{r}
+```{r,fig.margin = TRUE}
 stickleback.mm = filter(stickleback,genotype=="mm")
 mean(stickleback.mm$plates)
 ```
 
 You could now calcualte the mean plate numbers for each genotpye in this way: 
 
-```{r}
+```{r,fig.margin = TRUE}
 mean.mm = mean((filter(stickleback,genotype=="mm"))$plates)
 mean.mM = mean((filter(stickleback,genotype=="mM"))$plates)
 mean.MM = mean((filter(stickleback,genotype=="MM"))$plates)
@@ -395,7 +393,7 @@ mean.MM = mean((filter(stickleback,genotype=="MM"))$plates)
 
 
 **Note:** The tidyverse offers  an elegant way to write a long series of commands in a very readable format. To show you how to combine multiple commands quickly, we first need two more functions,  *group_by* and *summarize*, and a new operator called the pipe: %>%  (because we create a pipeline thorugh which our data "flows"). The above code to calculate the mean for each genotype would become:
-```{r}
+```{r,fig.margin = TRUE}
 stickleback %>% 
 group_by(genotype) %>%
 summarise(avg = mean(plates))
@@ -408,27 +406,27 @@ In the exercises you will learn a few more useful functions to rearrange, filter
 
 *Two possible answers (there are many ways to do this):*
 Straightforward "indexing":
-```{r}
+```{r,fig.margin = TRUE}
 mean.mm = mean(stickleback$plates[stickleback$genotype=="mm"])
 mean.mM = mean(stickleback$plates[stickleback$genotype=="mM"])
 mean.MM = mean(stickleback$plates[stickleback$genotype=="MM"])
 ```
 
 or by using the function *tapply* (look up the help page for this function by typing "?tapply"):
-```{R}
+```{r,fig.margin = TRUE}
 mean.plates = tapply(stickleback$plates,stickleback$genotyp,mean)
 ```
 
 ## Plots
 
 We can do a boxplot easily using ggplot:
-```{r}
+```{r,fig.margin = TRUE}
 ggplot(data = stickleback) + 
   geom_boxplot(mapping = aes(x = genotype, y = plates))
 ```
 
 In base R, this can be done as well:
-```{r}
+```{r,fig.margin = TRUE}
 boxplot(stickleback$plates[stickleback$genotype=="MM"],
         stickleback$plates[stickleback$genotype=="Mm"],
         stickleback$plates[stickleback$genotype=="mm"],
@@ -439,7 +437,7 @@ names = c("MM","Mm","mm")
 *Practice Question:* Can you plot a histogram of plate numbers of individuals with genotpye mm using base R plotting functions? Hint: Use what you have learned here and look up the function hist(). Alternatively, use ggplot and  geom_histogram.
 
 *Answer:*
-```{r}
+```{r,fig.margin = TRUE}
 hist(stickleback$plates[stickleback$genotype=="mm"],col="darkred",xlab="plates",main="Genotype: mm")
 
 ggplot(data=filter(stickleback,genotype == "mm")) + 
@@ -448,12 +446,13 @@ ggplot(data=filter(stickleback,genotype == "mm")) +
 
 
 
-# A bit of workflow {.tabset .tabset-pills}
+
+# A bit of workflow 
 In this part you will see how to explore a data set and store your analysis in a reproducible and reusable way.  
 
 ## What is an R script
 
-So far we only used the console of R. We enter commands and R executes them. Most of the time we want to have a whole bunch of commands stored in a single space: loading the file, preparing and cleaning the data,make figures, etc. The solution is easy, we jsut store our commands in a text file with the extension *.R* and tell R do execute this script. Evene better, RStudio has its own window panel for writing and executing scripts! Try to open a new R script (via File -> New -> R script) and just write your code in the newly opened window. When you have written your code, you can eitehr execute it step by step by putting the mouse cursor in the line you want to execute and then hit then *Run* button. If you want to eecute the whole script from beginning to end, just hit the *Source* button. This allows you to make reproducible scripts than you can modify and reuse whenever you need to. This is probably the biggest advantage of R. Once you have solved a problem and wrote a script for it, you can always reuse it. The more you use R, the less work will be necessary for each new project! 
+So far we only used the console of R. We enter commands and R executes them. Most of the time we want to have a whole bunch of commands stored in a single space: loading the file, preparing and cleaning the data,make figures, etc. The solution is easy, we just store our commands in a text file with the extension *.R* and tell R do execute this script. Evene better, RStudio has its own window panel for writing and executing scripts! Try to open a new R script (via File -> New -> R script) and just write your code in the newly opened window. When you have written your code, you can eitehr execute it step by step by putting the mouse cursor in the line you want to execute and then hit then *Run* button. If you want to eecute the whole script from beginning to end, just hit the *Source* button. This allows you to make reproducible scripts than you can modify and reuse whenever you need to. This is probably the biggest advantage of R. Once you have solved a problem and wrote a script for it, you can always reuse it. The more you use R, the less work will be necessary for each new project! 
 
 
 In the next part I will introduce the basic tools for creating an automated analysis that consists of several steps.
@@ -462,29 +461,29 @@ In the next part I will introduce the basic tools for creating an automated anal
 
 Defining variables is really easy in R. Unlike in other programming languages we do not need to precisly define what kind of variable we want. We can just werite down a name and assign a value, R figures out the rest. For instance:
 
-```{r}
+```{r,fig.margin = TRUE}
 x = 5
 ```
 
 automatically creates a *numeric* variable and assigns the value 5 to it. This command
 
-```{r}
+```{r,fig.margin = TRUE}
 vec = c(1,2,3,4,5,6)
 ```
 
 creates a vectors that contains the values 1 to 6. The *c* here stands for *concatenate* and tells us to combine all the numbers into a single vector. You can access the elements of the vector by their index, e.g., we can set the 5th element of the vector to 0 in the follwoing way:
-```{r}
+```{r,fig.margin = TRUE}
 vec[5] = 0 
 ```
 
 In general it is advised to define the type of a varible before using it, and also tell R how big this variable will be (that is, how much memory we need to reserve to store it). For instance, if we want to define a 3x4 matrix we can use the command *matrix*:
-```{r}
+```{r,fig.margin = TRUE}
 mat=matrix(ncol=3,nrow=4)
 ```
 
 You can then enter numbers in the rows and columns using the [] operator:
 
-```{r}
+```{r,fig.margin = TRUE}
 mat
 mat[2,3]= 5 
 mat
@@ -492,7 +491,7 @@ mat
 You can see that the matrix is intially filled with the object *NA* which stands for *not available* and ist the term R uses for missing data. Just like in dataframes (after all a data frame is more or less a matrix with benefits), you can also name columns and rows and use them to access the elements:
 
 
-```{r}
+```{r,fig.margin = TRUE}
 mat = matrix(1:25,nrow=5,ncol=5)
 colnames(mat) = c("var1","var2","var3","var4","var5")
 rownames(mat) = c("obs1","obs2","obs3","obs4","obs5")
@@ -505,17 +504,17 @@ mat["obs2","var3"]
 
 
 If we want to store some text, we can write
-```{r}
+```{r,fig.margin = TRUE}
 word = "hello"
 ```
 and R will automatically recognize that the string of letters "hello" is not numeric and will creat a variable of type *character*. Try to see how this is different from 
 
-```{r}
+```{r,fig.margin = TRUE}
 letters = c("h","e","l","l","o")
 ```
 
 Next try to see what happens here:
-```{r}
+```{r,fig.margin = TRUE}
 hello = 10
 word1 = "hello"
 word2 = hello
@@ -533,7 +532,7 @@ Before we have seen how to calcualte the mean number of plates for each genotype
 
 Here is a simple for loop that calcualtes the mean number of plates for each genotpye in our stickleback data set:
 
-```{r}
+```{r,fig.margin = TRUE}
 
 # first we create a vector that contains all genotypes in our dataset
 # we can do this manually: 
@@ -560,7 +559,7 @@ for(g in genotypes)
 
 We can see what is happening here by showing the intermediate steps more explicitly:
 
-```{r}
+```{r,fig.margin = TRUE}
 i = 1
 for(g in genotypes)
 {
@@ -587,7 +586,7 @@ There are 3 basics steps here:
 ## If / else
 Another useful tool are if/else constructs. They allow you to make choices during your script. Let us again consider the sticklbeack data set. Let say we want to calcualte the difference between the  number of plates of plates of an individual and the mean of that indivudal's genotype. We can do this by combining loops with if/else statements (admittedly, there are better ways to achieve this but it is a good instuctive example):
 
-```{r}
+```{r,fig.margin = TRUE}
 number.obs = dim(stickleback)[1]
 diff.to.mean = vector("numeric",length=number.obs)
 for (i in 1:number.obs)
@@ -611,18 +610,19 @@ head(stickleback3)
 
 
 
-# Working with Distributions and random variables {.tabset .tabset-pills}
+
+# Working with Distributions and random variables 
 
 ## Functions to work with probaility distributions
 R has a set of functions to work with distirbutions and random numbres. Have a look at 
-```{r}
+```{r,fig.margin = TRUE}
 help(Distributions)
 ```
 if you want to know more. Let us focus on the normal distirbution. It's density is given by
 $$f(x \mid \mu,\sigma) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
 The function *dnorm* returns the value of the probability density function for the normal distribution for x, given parameters  $\mu$ and $\sigma$. Some examples of using dnorm are below:
 
-```{r}
+```{r,fig.margin = TRUE}
 # We use the pdf of the normal with x = 0, 
 # mu = 0 and sigma = 0. 
 # The dnorm function takes three main arguments, 
@@ -637,7 +637,7 @@ dnorm(2, mean = 5, sd = 3)
 
 Let us do a  plot showing the density fucntion of the normal distirbution. We use base R as ggplot works fine with data frames and here we prefer to wrok with vectors instead. 
 
-```{r}
+```{r,fig.margin = TRUE}
 # The plot should show x values on the x-axis and the dnorm(x,...) 
 # values on the y-axis
 
@@ -660,7 +660,7 @@ plot(x_vals,y_vals,
 Of course, you could create a data frame with these values and then use ggplot if you want to:
 
 
-```{r}
+```{r,fig.margin = TRUE}
 std_norm = data.frame(x= x_vals,y=y_vals)
 
 ggplot(data = std_norm) +
@@ -672,7 +672,7 @@ The other three most relevant functions are:
 
 ## Quantiles
 The function qnorm gives us the quantiles of the normal distirbution:
-```{r}
+```{r,fig.margin = TRUE}
 # Let's make a vector of : 
 # from 0 to 1 by increments of .05
 quantiles <- seq(0, 1, by = .05)
@@ -689,7 +689,7 @@ qvalues
 
 
 We could now plot the PDF of a normal distribution and illustrate a few of the concepts:
-```{r}
+```{r,fig.margin = TRUE}
 plot(x_vals,y_vals, 
      type = "l", # Make it a line plot
      main = "pdf of the Standard Normal",
@@ -725,7 +725,7 @@ R also allows us to draw random numbers. This is very handy in many situations. 
 + the standard deviation of the distribution
 
 Here is an example, where we calculate a sample of 0, 100 and 1000 observations of the same distirbution.
-```{r}
+```{r,fig.margin = TRUE}
 
 # Let's generate three different vectors of random numbers 
 # from a normal  distribution
@@ -745,7 +745,7 @@ hist(n10000, breaks = 100)
 
 *Note:* If we set a *seed* for our random number generator (the algorithm that is used to calcualte a radnom number), we can make our analysis replicable:
 
-```{r}
+```{r,fig.margin = TRUE}
 set.seed(100)
 rnorm(1,0,1)
 rnorm(1,0,1)
@@ -760,13 +760,13 @@ rnorm(1,0,1)
 ## Plotting Confidence intervalls
 We first generate a data frame with a summary of our data (this can be done in many ways, this is a concise one):
 
-```{r}
+```{r,fig.margin = TRUE}
 CIs <- summarySE(stickleback, measurevar="plates", groupvars=c("genotype"))
 
 CIs
 ```
 and then we use the data frame with our summary to add error bars to our plot:
-```{r}
+```{r,fig.margin = TRUE}
 ggplot(data = CIs) +
   geom_point(mapping = aes(x = genotype,y=plates)) +
   geom_errorbar(mapping = aes(x = genotype,y=plates,ymin=plates-ci, ymax=plates+ci), width=.1) 
@@ -774,7 +774,7 @@ ggplot(data = CIs) +
 
 *Note:* One can shorten things by specifying the aesthetics in the ggplot command - this simply means that all geom_functions use the same x and y variables (which is very often the case, but not always!):
 
-```{r}
+```{r,fig.margin = TRUE}
 ggplot(data = CIs, aes(x = genotype,y=plates)) +
   geom_point() +
   geom_errorbar(mapping = aes(ymin=plates-ci, ymax=plates+ci), width=.1) 
@@ -783,7 +783,7 @@ ggplot(data = CIs, aes(x = genotype,y=plates)) +
 
 *Note:* The function *t.test()* can also be used to calcualte confidence intervalls assuming a normal distribution.  
 
-```{r}
+```{r,fig.margin = TRUE}
 genotypes = c("MM","Mm","mm") 
 CI.upper = vector("numeric",3)
 CI.lower = vector("numeric",3)
@@ -815,7 +815,7 @@ ggplot(data = CI.data, aes(x = genotype,y=means)) +
 
 ## Putting everything together: A simple simulation 
 Copy and paste this R code into a script. Before you run it, try to figure out what it does.
-```{r fig.show='hide'}
+```{r,fig.margin = TRUE,fig.show='hide'}
 reps = 1000
 sample_size = 10
 mu = 10
@@ -842,14 +842,14 @@ lines(x,y)
 
 
 
-# Hypothesis Tests {.tabset .tabset-pills}
+# Hypothesis Tests 
 
 In this chpater we will learn how to do hypotehsis tests in R. This is very simple, as you will see - often a single line of code is sufficient for conducting a test.
 
 ## Binomial-test
 We use the binomial test to test whether spermatogenesis genes in the mouse genome occur with unusual frequency on the X chromosome. First, we load the dat set and inspect it:
 
-```{r message = FALSE}
+```{r,fig.margin = TRUE,message = FALSE}
 mouseGenes <- read_csv("~/Dropbox/Teaching/BlogdownPages/StatisticsForBiology/chap07e2SexAndX.csv")
 
 head(mouseGenes)
@@ -899,7 +899,7 @@ binom.confint(30, n = 87, method = "ac")
 ## $\chi^2$ test
 
 We perform a goodness-of-fit test. We use a Poisson probability model and fit it to frequency data on the number of marine invertebrate extinctions per time block in the fossil record. We first read and inspect the data. Each row is a time block, with the observed number of extinctions listed.
-```{r echo = F, warning = F,message = FALSE}
+```{r,fig.margin = TRUE,echo = F, warning = F,message = FALSE}
 extinctData <- read_csv("~/Dropbox/Teaching/BlogdownPages/StatisticsForBiology/ABD_all_data/chapter08/chap08e6MassExtinctions.csv")
 
 
@@ -908,14 +908,14 @@ extinctData <- read_csv("~/Dropbox/Teaching/BlogdownPages/StatisticsForBiology/A
 
 The first step is to create a frequency table for the number of time blocks in each number-of-extinctions category. The command table does what's needed, but note that some extinction categories are not represented (e.g., 0, 12 and 13 extinctions).
 
-```{r}
+```{r,fig.margin = TRUE}
 extinctTable <- table(extinctData$numberOfExtinctions)
 data.frame(Frequency = addmargins(extinctTable))
 ```
 
 To remedy the problem of missing categories, we transform the original variable into a factor (that is, a categorical variable) with all counts between 0 and 20 as levels (note that 20 is not the maximum possible number of extinctions, but it is a convenient cutoff for this table).
 
-```{r}
+```{r,fig.margin = TRUE}
 extinctData = mutate(extinctData,nExtinctFactor = factor(numberOfExtinctions, levels = c(0:20)))
                      
 extinctTable2 <- table(extinctData$nExtinctFactor)
@@ -924,21 +924,21 @@ extinctTable2 <- table(extinctData$nExtinctFactor)
 
 Estimate the mean number of extinctions per time block from the data. The estimate is needed for the goodness-of-fit test.
 
-```{r}
+```{r,fig.margin = TRUE}
 meanExtinctions <- mean(extinctData$numberOfExtinctions)
 meanExtinctions
 ```
 
 Calculate expected frequencies under the Poisson distribution using the estimated mean. (For now, continue to use 20 extinctions as the cutoff, but don't forget that the Poisson distribution includes the number-of-extinctions categories 21, 22, 23, and so on.)
 
-```{r}
+```{r,fig.margin = TRUE}
 expectedProportion <- dpois(0:20, lambda = meanExtinctions)
 expectedFrequency <- expectedProportion * 76
 ```
 
 Show the frequency distribution in a histogram.
 
-```{r}
+```{r,fig.margin = TRUE}
 
 ggplot(extinctData) +
   geom_histogram(mapping= aes(x=numberOfExtinctions),fill = "firebrick",color="black",bins=21)+	
@@ -948,7 +948,7 @@ ggplot(extinctData) +
 
 Make a table of observed and expected frequencies, saving as a data frame.
 
-``` {r}
+``` {r,fig.margin = TRUE}
 extinctFreq <- data.frame(nExtinct = 0:20, obsFreq = as.vector(extinctTable2), 
 	expFreq = expectedFrequency)
 extinctFreq
@@ -957,7 +957,7 @@ extinctFreq
 
 The low expected frequencies will violate the assumptions of the $\chi^2$ test, so we will need to group categories. Create a new variable that groups the extinctions into fewer categories (again, there are many ways to do this, here I use the function *cut*).
 
-```{r}
+```{r,fig.margin = TRUE}
 extinctFreq$groups <- cut(extinctFreq$nExtinct, 
 	breaks = c(0, 2:8, 21), right = FALSE,
 	labels = c("0 or 1","2","3","4","5","6","7","8 or more"))
@@ -966,7 +966,7 @@ extinctFreq
 
 Then sum up the observed and expected frequencies within the new categories.
 
-``` {r}
+``` {r,fig.margin = TRUE}
 obsFreqGroup <- tapply(extinctFreq$obsFreq, extinctFreq$groups, sum)
 expFreqGroup <- tapply(extinctFreq$expFreq, extinctFreq$groups, sum)
 ObsVsExp = data.frame(obs = obsFreqGroup, exp = expFreqGroup,group= c("0 or 1","2","3","4","5","6","7","8 or more"))
@@ -975,14 +975,14 @@ ObsVsExp
 
 The *expected* frequency for the last category, "8 or more", doesn't yet include the expected frequencies for the categories 21, 22, 23, and so on (remeber that we used a cut-off of 20 before!). However, the expected frequencies must sum to 76. In the following, we recalculate the expected frequency for the last group, expFreqGroup[length(expFreqGroup)], as 76 minus the sum of the expected frequencies for all the other groups.
 
-```{r}
+```{r,fig.margin = TRUE}
 expFreqGroup[length(expFreqGroup)] = 76 - sum(expFreqGroup[1:(length(expFreqGroup)-1)])
 data.frame(obs = obsFreqGroup, exp = expFreqGroup)
 ```
 
 Finally, we are ready to carry out the $\chi^2$ goodness-of-fit test. R gives us a warning here because one of the expected frequencies is less than 5. However, we have been careful to meet the assumptions of the $\chi^2$ test, so let's persevere. Once again, R doesn't know that we have estimated a parameter from the data (the mean), so it won't use the correct degrees of freedom when calculating the P-value. As before, we need to grab the $\chi^2$ value calculated by chisq.test and recalculate $P$ using the correct degrees of freedom. Since the number of categories is now 8, the correct degrees of freedom is 8 - 1 - 1 = 6.
 
-```{r}
+```{r,fig.margin = TRUE}
 saveChiTest <- chisq.test(obsFreqGroup, p = expFreqGroup/76)
 saveChiTest 
 # Wrong degrees of freedom, so wrong P-value!
@@ -995,7 +995,7 @@ pValue
 
 Finally, we can compare the expected and observed data in a histogramm. One can clearly see that the fit is not very good. 
 
-```{r}
+```{r,fig.margin = TRUE}
 df = data.frame(x = 0:20,y = 76*dpois(0:20,meanExtinctions))
 
 ggplot(extinctData) +
@@ -1004,13 +1004,13 @@ ggplot(extinctData) +
   geom_line(data = df, mapping = aes(x = x,y=y))
 ```
 
-## t-test
 
-### One-sample t-test
+
+## One-sample t-test
 We use a one-sample t-test to compare body temperature in a random sample of people with the "expected" temperature 98.6 F.
 
 Read and inspect the data:
-```{r}
+```{r,fig.margin = TRUE}
 heat <- read.csv(url("http://www.zoology.ubc.ca/~schluter/WhitlockSchluter/wp-content/data/chapter11/chap11e3Temperature.csv"))
 head(heat)
 ```
@@ -1018,7 +1018,7 @@ head(heat)
 
 A one-sample t-test can be calculate using the function t.test. The mu argument gives the value stated in the null hypothesis. Let us first transform the data into celsius using the formula to turn: 
 $$(X F - 32) * 5/9 = Y C$$
-```{r heat_histo2}
+```{r,fig.margin = TRUE,heat_histo2}
 
 mu0 = (98.6-32)*5/9
 
@@ -1031,23 +1031,23 @@ ggplot(data = heat) +
 
 
 
-```{r}
+```{r,fig.margin = TRUE}
 t.test(heat$temperatureC, mu = mu0)
 ```
 
 
-### Two-sample t-test
+## Two-sample t-test
 
 We compare horn length of live and dead (spiked) horned lizards.
 
-```{r}
+```{r,fig.margin = TRUE}
 lizard <- read.csv(url("http://www.zoology.ubc.ca/~schluter/WhitlockSchluter/wp-content/data/chapter12/chap12e3HornedLizards.csv"))
 head(lizard)
 ```
 
 Note that there is one missing value for the variable "squamosalHornLength". Everything is easier if we eliminate the row with missing data.
 
-```{r}
+```{r,fig.margin = TRUE}
 lizard2 <- na.omit(lizard)
 head(lizard2)
 
@@ -1062,37 +1062,37 @@ ggplot(data = lizard2) +
 
 A two-sample t-test of the difference between two means can be carried out with t.test by using a formula, asking if squamosalHornLength is predicted by Survival, and specifying that the variables are in the data frame lizard.
 
-```{r}
+```{r,fig.margin = TRUE}
 t.test(squamosalHornLength ~ Survival, data = lizard)
 ```
 
 The same reuslt could be achieved with 
-```{r}
+```{r,fig.margin = TRUE}
 t.test(lizard$squamosalHornLength[lizard$Survival=="killed"], lizard$squamosalHornLength[lizard$Survival=="living"])
 ```
 
 
 The output of t.test includes the 95% confidence interval for the difference between means. Add $confint after calling the function to get R to report only the confidence interval. The formula in the following command tells R to compare squamosalHornLength between the two groups indicated by Survival.
 
-```{r}
+```{r,fig.margin = TRUE}
 t.test(squamosalHornLength ~ Survival, data = lizard)$conf.int
 ```
 
 *Note: R has used the Welch two sample t-test here. If we want to force R to use the standrad t.test we set a parameter specifiying this:
 
-```{r}
+```{r,fig.margin = TRUE}
 t.test(squamosalHornLength ~ Survival, data = lizard,var.equal = TRUE)
 ```
 
 
 
-# Deviations from Normailty {.tabset .tabset-pills}
+# Deviations from Normailty 
 
 ## QQ Plots and Transformations
 We investigate the ratio of biomass between marine reserves and non-reserve control areas.
 
 
-```{r}
+```{r,fig.margin = TRUE}
 marine <- read.csv(url("http://www.zoology.ubc.ca/~schluter/WhitlockSchluter/wp-content/data/chapter13/chap13e1MarineReserve.csv"))
 head(marine)
 
@@ -1102,7 +1102,7 @@ ggplot(data = marine) +
 ```
 Normal quantile plot of biomass ratio data.
 
-```{r}
+```{r,fig.margin = TRUE}
 library(car)
 qqPlot(marine$biomassRatio, distribution = "norm")
 ```
@@ -1111,13 +1111,13 @@ qqPlot(marine$biomassRatio, distribution = "norm")
 
 The function log() takes the natural logarithm of all the elements of a vector or variable. The following command puts the results into a new variable in the same data frame, marine.
 
-```{r}
+```{r,fig.margin = TRUE}
 marine = mutate(marine,logBiomassRatio =  log(biomassRatio))
 ```
 
 Histogram and QQ-Plot of the log-transformed marine biomass ratio.
 
-```{r}
+```{r,fig.margin = TRUE}
 ggplot(data = marine) +
   geom_histogram(mapping = aes(x = logBiomassRatio),col="black",fill="darkred")
 
@@ -1127,12 +1127,12 @@ qqPlot(marine$logBiomassRatio, distribution = "norm")
 
 95% confidence interval of the mean using the log-transformed data.
 
-```{r}
+```{r,fig.margin = TRUE}
 t.test(marine$logBiomassRatio)$conf.int
 ```
 Back-transform lower and upper limits of confidence interval (exp is the inverse of the log function).
 
-```{r}
+```{r,fig.margin = TRUE}
 conf.int = exp(t.test(marine$logBiomassRatio)$conf.int )
 meanBiomassRatio = mean(marine$biomassRatio)
 
@@ -1148,14 +1148,14 @@ ggplot(data = marine) +
 We use the Wilcoxon rank-sum test (equivalent to the Mann-Whitney U-test) comparing times to mating (in hours) of starved and fed female sagebrush crickets. We also apply the permutation test to the same data.
 
 Read and inspect data:
-```{r}
+```{r,fig.margin = TRUE}
 cannibalism <- read.csv(url("http://www.zoology.ubc.ca/~schluter/WhitlockSchluter/wp-content/data/chapter13/chap13e5SagebrushCrickets.csv"))
 head(cannibalism)
 
 ```
 
 
-```{r}
+```{r,fig.margin = TRUE}
 ggplot(data = cannibalism) +
   geom_histogram(mapping = aes(x = timeToMating ),bins=12,color="black",fill="darkred") + 
   facet_wrap( ~feedingStatus,nrow=2) + 
@@ -1166,14 +1166,14 @@ ggplot(data = cannibalism) +
 
 We perfrom the Wilcoxon rank-sum test (equivalent to Mann-Whitney U-test)
 
-```{r}
+```{r,fig.margin = TRUE}
 wilcox.test(timeToMating ~ feedingStatus, data = cannibalism)
 ```
 ## Permutation Test
 
 We use a permutation test of the difference between mean time to mating of starved and fed crickets.We begin by calculating the observed difference between means (starved minus fed). The difference is -18.25734 in this data set.
 
-```{r}
+```{r,fig.margin = TRUE}
 
 # tapply is another way to calcualte the means of time to mating
 # for each feeding status seperatly
@@ -1187,14 +1187,14 @@ diffMeans
 
 We choose to perform 1000 permutations and set a seed to make the analysis reproducible:
 
-```{r}
+```{r,fig.margin = TRUE}
 nPerm <- 10000
 set.seed(2048)
 ```
 
 The following code implements aloop to permute the data many times (determined by nperm, investigate the function sample to see what it does). In the loop, i is just a counter that goes from 1 to nPerm by 1; each permuted difference is saved in the permResult.
 
-```{r}
+```{r,fig.margin = TRUE}
 permResult <- vector() # initializes
 for(i in 1:nPerm){
 	# step 1: permute the times to mating
@@ -1208,30 +1208,30 @@ for(i in 1:nPerm){
 
 Plot null distribution based on the permuted differences.
 
-```{r}
+```{r,fig.margin = TRUE}
 hist(permResult, right = FALSE, breaks = 100,col="darkred")
 ```
 
 Use the null distribution to calculate an approximate P-value. This is the twice the proportion of the permuted means that fall below the observed difference in means, diffMeans (-18.25734 in this example). The following code calculates the number of permuted means falling below diffMeans.
 
-```{r}
+```{r,fig.margin = TRUE}
 sum(as.numeric(permResult <= diffMeans))
 ```
 
 These commands obtain the fraction of permuted means falling below diffMeans.
 
-```{r}
+```{r,fig.margin = TRUE}
 sum(as.numeric(permResult <= diffMeans)) / nPerm
 ```
 
 Finally, multiply by 2 to get the P-value for a two-sided test.
-```{r}
+```{r,fig.margin = TRUE}
 2 * ( sum(as.numeric(permResult <= diffMeans)) / nPerm )
 ```
 
 We can illustrate the permutaed differences and add the observed difference on to show the outcome of our test: the birght red colored bars indicate the proportion of permutation results that yielded a more exterme results as the on observed.
 
-```{r}
+```{r,fig.margin = TRUE}
 hist(permResult[permResult>diffMeans],breaks=seq(-50,50,by=1),col="darkred",main="")
 hist(permResult[permResult<=diffMeans],breaks=seq(-50,50,by=1),add=T,col="red")
 abline(v = diffMeans,col="red",lwd=2)
@@ -1248,13 +1248,13 @@ We compare the phase shift in the circadian rhythm of melatonin production in pa
 
 Read and inspect the data.
 
-```{r}
+```{r,fig.margin = TRUE}
 circadian <- read.csv(url("http://www.zoology.ubc.ca/~schluter/WhitlockSchluter/wp-content/data/chapter15/chap15e1KneesWhoSayNight.csv"))
 ```
 
 Set the preferred ordering of groups in tables and graphs.
 
-```{r}
+```{r,fig.margin = TRUE}
 circadian$treatment <- factor(circadian$treatment, 
 	levels = c("control", "knee", "eyes")) 
 
@@ -1269,7 +1269,7 @@ mean_SD =data.frame(mean = meanShift, std.dev = sdevShift, n = n,treatment = c("
 
 We plot the data showing the raw data points as well as the mean (including error bars shwoing one standard error in each direction).
 
-```{r}
+```{r,fig.margin = TRUE}
 
 ggplot(data = circadian) +
   geom_jitter(mapping = aes(x = treatment,y=shift),width=0.1) + 
@@ -1283,14 +1283,14 @@ ggplot(data = circadian) +
 
 The first step involves fitting the ANOVA model to the data using lm ("lm" stands for "linear model", of which ANOVA is one type). Then we use the command anova to assemble the ANOVA table.
 
-```{r}
+```{r,fig.margin = TRUE}
 circadianAnova <- lm(shift ~ treatment, data = circadian)
 anova(circadianAnova)
 ```
 
 R2 indicating the fraction of variation in the response variable "explained" by treatment. This is again done in two steps. The first step calculates a bunch of useful quantities from the ANOVA model object previously created with a lm command. The second step shows the R2 value.
 
-```{r}
+```{r,fig.margin = TRUE}
 circadianAnovaSummary <- summary(circadianAnova)
 circadianAnovaSummary$r.squared
 ```
@@ -1301,19 +1301,19 @@ Analyze data from a factorial experiment investigating the effects of herbivore 
 
 Read and inspect the data.
 
-```{r}
+```{r,fig.margin = TRUE}
 algae <- read.csv(url("http://www.zoology.ubc.ca/~schluter/WhitlockSchluter/wp-content/data/chapter18/chap18e3IntertidalAlgae.csv"))
 head(algae)
 ```
 
 We first take a look at the data:
-```{r}
+```{r,fig.margin = TRUE}
 ggplot(data = algae,  aes(x = height, color = herbivores, group = herbivores, y = sqrtArea)) +
   geom_point()
 ```
 
 This is  a mess so we next add some summary statistics of the data: the mean Area for each combination of explanatory variables.
-```{r}
+```{r,fig.margin = TRUE}
 ggplot(data = algae) +
   aes(x = height, color = herbivores, group = herbivores, y = sqrtArea) +
     geom_point()+
@@ -1327,49 +1327,49 @@ It looks like there is some interaction between *height* and *herbivores*, but t
 
 Let us first fit a null model having both main effects but no interaction term. We can do this again with *lm* (*note:* conceptually a t-test, an ANOVA and linear regression are all pretty much the same thing and hence the function lm can be used in all these cases):
 
-```{r}
+```{r,fig.margin = TRUE}
 algaeNoInteractModel <- lm(sqrtArea ~ height + herbivores, data = algae)
 
 summary(algaeNoInteractModel)
 ```
 
 Now fit the full model, with interaction term included.
-```{r}
+```{r,fig.margin = TRUE}
 algaeFullModel <- lm(sqrtArea ~ height * herbivores, data = algae)
 ```
 
 Finally we cretea na ANOVA table that compares the two models:
-```{r}
+```{r,fig.margin = TRUE}
 anova(algaeNoInteractModel, algaeFullModel)
 ```
 
 
-{.tabset .tabset-pills}
+
 # Linear Regression
 
 We test the null hypothesis of zero regression slope. The data are from an experiment investigating the effect of plant species diversity on the stability of plant biomass production.
 
 Read and inspect the data.
-```{r}
+```{r,fig.margin = TRUE}
 prairie <- read.csv(url("http://www.zoology.ubc.ca/~schluter/WhitlockSchluter/wp-content/data/chapter17/chap17e3PlantDiversityAndStability.csv"))
 head(prairie)
 ```
 
 We perfrom a Log-transform on the varibale stability and include the new variable in the data frame. Inspect the data frame once again to make sure the function worked as intended.
 
-```{r}
+```{r,fig.margin = TRUE}
 prairie = mutate(prairie,logStability = log(biomassStability))
 head(prairie)
 ```
 Scatter plot with regression line in base R:
-```{r}
+```{r,fig.margin = TRUE}
 plot(logStability ~ nSpecies, data = prairie) 
 prairieRegression <- lm(logStability ~ nSpecies, data = prairie)
 abline(prairieRegression)
 ```
 
 Scatter plot with regression line in ggplot:
-```{r}
+```{r,fig.margin = TRUE}
 ggplot(data = prairie,aes(y=logStability,x=nSpecies)) +
   geom_point()+
   geom_smooth(method = "lm")
@@ -1378,21 +1378,21 @@ ggplot(data = prairie,aes(y=logStability,x=nSpecies)) +
 
 
 
-```{r}
+```{r,fig.margin = TRUE}
 prairieRegression <- lm(logStability ~ nSpecies, data = prairie)
 summary(prairieRegression)
 confint(prairieRegression)
 ```
 
 Finally, we check our modelling assumptions with a QQ plot of the residuals as well as a Tukey-Anscombe plot:
-```{r}
+```{r,fig.margin = TRUE}
 qqPlot(prairieRegression$residuals,dist="norm")
 plot(prairieRegression$fitted.values,prairieRegression$residuals,xlab="fitted",ylab="Residuals")
 
 ```
 
 
-{.tabset .tabset-pills}
+
 # Additional notes to the course slides
 ## Law of total probability
 
@@ -1447,7 +1447,7 @@ $= 0.417.$
 
 Let us test this with a small R simulation:
 
-```{r}
+```{r,fig.margin = TRUE}
 # We do 10000 die rolls for each die:
 die.1 = sample.int(6, size = 10000,replace=T)
 die.2 = sample.int(6, size = 10000,replace=T)
@@ -1457,13 +1457,13 @@ sum(die.2>die.1)/10000
 
 ```
 
-{.tabset .tabset-pills}
 
-# Exercises {.tabset .tabset-dropdown}
+
+# Exercises {.tabset .tabset-pill}
 
 ## Week 1 (23.02.2022) 
 
-#### Exercise 1
+### Exercise 1
 
 The peppered moth (Biston betularia) occurs in two types: peppered (speckled black and white) and melanic (black). A researcher wished to measure the proportion of melanic individuals in the peppered moth population in England, to examine how this proportion changed from year to year in the past. To accomplish this, she photographed all the peppered moth specimens available in museums and large private collections and grouped them by the year in which they had been collected. Based on this sample, she calculated the proportion of melanic individuals in every year. The people who collected the specimens, she knew, would prefer to collect whichever type was rarest in any given year, since those would be the most valuable.
 
@@ -1473,7 +1473,7 @@ The peppered moth (Biston betularia) occurs in two types: peppered (speckled bla
 
  c)	What type of error might be introduced by the sampling method when estimating the proportion of melanic moths?
 
-#### Exercise 2	
+### Exercise 2	
 Which of the following numerical variables are continuous? Which are discrete? (Note: Discrete variables are those that have a finite set of predefined values, whereas continuous variables can take any value within a given interval.)
 
 a)	Number of injuries sustained in a fall
@@ -1484,7 +1484,7 @@ c)	Number of crimes committed by a randomly sampled individual
 
 d)	Logarithm of body mass
 
-#### Exercise 3	
+### Exercise 3	
 For each of the following studies, say which is the explanatory variable and which is the response variable. Also, say whether the study is observational or experimental.
 
  a)	Forestry researchers wanted to compare the growth rates of trees growing at high altitude to that of trees growing at low altitude. They measured growth rates using the space between tree rings in a set of trees harvested from a natural forest. 
@@ -1497,13 +1497,13 @@ For each of the following studies, say which is the explanatory variable and whi
  
  e)	Bowen et al. (2012) studied the effects of advanced communication therapy for patients whose communication skills had been affected by previous strokes. They randomly assigned two therapies to stroke patients. One group received advanced communication therapy and the other received only social visits without formal therapy. Both groups otherwise received normal, best-practice care. After six months, the communication ability (as measured by a standardized quantitative test score) was measured on all patients.
 
-#### Exercise 4
+### Exercise 4
 During World War II, the British Royal Air Force estimated the density of bullet holes on different sections of planes returning to base from aerial sorties. Their goal was to use this information to determine which plane sections most needed additional protective shields. (It was not possible to reinforce the whole plane, because it would weigh too much.) They found that the density of holes was highest on the wings and lowest on the engines and near the cockpit, where the pilot sits (their initial conclusion, that therefore the wings should be reinforced, was later shown to be mistaken). What is the main problem with the sample: bias or large sampling error? What part of the plane should have been reinforced? 
 
 ![Figure for exercise 4: Airplane bullet holes](AirplaneMissileHits.png)
 
 
-#### Exercise 5
+### Exercise 5
 An important quantity in conservation biology is the number of plant and animal species inhabiting a given area. To survey the community of small mammals inhabiting Kruger National Park in South Africa, a large series of live traps were placed randomly throughout the park for one week in the main dry season of 2004. Traps were set each evening and checked the following morning. Individuals caught were identified, tagged (so that new captures could be distinguished from recaptures), and released. At the end of the survey, the total number of small mammal species in the park was estimated by the total number of species captured in the survey.
 
  a)	What is the parameter being estimated in the survey? 
@@ -1514,7 +1514,7 @@ An important quantity in conservation biology is the number of plant and animal 
  
 ## Week 2 (02.03.2022)
 
-#### Exercise 6
+### Exercise 6
 We use the MPG data set introduced in the lecture.  Answer the following questions. You can use base R or ggplot if not otherwise specified.
 
  a)	Run ggplot(data = mpg). What do you see?
@@ -1529,7 +1529,7 @@ We use the MPG data set introduced in the lecture.  Answer the following questio
 
  f)	What is wrong with this code? Why are the points not blue?
  
-```{r, echo = TRUE,results='hide', message=F, warning=F}
+```{r,fig.margin = TRUE, echo = TRUE,results='hide', message=F, warning=F}
 ggplot(data = mpg) + 
 
   geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
@@ -1550,7 +1550,7 @@ ggplot(data = mpg)
 
 ## Week 3 (09.03.2022)
 
-#### Exercise 7
+### Exercise 7
 Load the data set "chap04e1HumanGeneLengths.csv" (the lengh of genes in the human genome, found on ilias) and answer the following questions and provide the R code you used for that. Put all of your analysis in a single R script. 
 
  a)	How many individuals are in the sample (i.e., what is the sample size, n)?
@@ -1566,10 +1566,10 @@ Load the data set "chap04e1HumanGeneLengths.csv" (the lengh of genes in the huma
 
 ## Week 4 (16.03.2022)
 
-#### Exercise 8
+### Exercise 8
 Use the stickleback dataset and calcualte the median and mean for each genotpye. Make a histogramm and add vertical lines to the histogramm indicating the mean and median for each genotype. What do you see? How does the shape of the distribution affect differences between mean and median?
 
-#### Exercise 9 (standard)
+### Exercise 9 (standard)
 Copy and paste this R code into a script. Before you run it, try to figure out what it does. Modify the output so that it looks nicer, i.e., add labels, change theme, change colors, ...
 
 Tip 1: Use the help function or the internet to figure out what the different commands and functions are doing. 
@@ -1578,7 +1578,7 @@ Tip 2: This might also be helpful: https://s-peischl.github.io/StatisticsForBiol
 
 Tip 3: Look at the next exercise, it may give you an idea what is happening in this R code ...
 
-```{r fig.show='hide'}
+```{r,fig.margin = TRUE,fig.show='hide'}
 reps = 1000
 sample_size = 10
 mu = 10
@@ -1610,7 +1610,7 @@ ggplot(data = df) +
 
 
 
-#### Exercise 9 (challenging)
+### Exercise 9 (challenging)
 Write a short R script that simulates the sampling distribution of the mean. Plot the sampling distribution and add the theoretical expectation to the plot. Follow the following steps:
 
  a)	Choose a distribution that represents your population (e.g., Normal or Poisson).
@@ -1756,7 +1756,7 @@ Make a sketch for each case and calculate the values using R functions.
 Use the data set "chap11e2Stalkies.csv" of  eye span measurements from a sample of stalk-eyed flies: 
 
 
-```{r} 
+```{r,fig.margin = TRUE} 
 stalkie  = read.csv(url("http://www.zoology.ubc.ca/~schluter/WhitlockSchluter/wp-content/data/chapter11/chap11e2Stalkies.csv")) 
 ```
 
@@ -1784,7 +1784,7 @@ d) Can you calculate the probability that you observer a more extreme results th
 
 As the world warms, the geographic ranges of species  might shift toward cooler areas. Chen et al. (2011) studied recent changes  in the highest elevation of 31 taxa, in meters, over the late 1900s and early 2000s. Positive numbers indicate upward shifts in elevation, and negative numbers indicate shifts to lower elevations. The values are given by:
 
-```{r}
+```{r,fig.margin = TRUE}
 data = c(58.9, 7.8, 108.6, 44.8, 11.1, 19.2, 61.9, 30.5, 12.7, 35.8, 7.4, 39.3, 24.0, 62.1, 24.3, 55.3, 32.7, 65.3, -19.3, 7.6, -5.2, -2.1, 31.0, 69.0, 88.6, 39.5, 20.7, 89.0, 69.0, 64.9, 64.8)
 ```
 
@@ -1827,7 +1827,7 @@ i) Can you describe how to calculate a p-value for this test statistic?
 ### Exercise 20
 Perform a goodness-of-fit test for a data set with two categories. The data file is "chap08e4XGeneContent.csv" and can be found on ilias or online:
 
-```{r}
+```{r,fig.margin = TRUE}
 geneContent <- read.csv(url("http://whitlockschluter.zoology.ubc.ca/wp-content/data/chapter08/chap08e4XGeneContent.csv"))
 ```
 
@@ -1842,7 +1842,7 @@ c) Draw a conclusion from your test.
 ### Exercise 21
 Load the dataset chap08e1DayOfBirth.csv:
 
-```{r}
+```{r,fig.margin = TRUE}
 birthDay <- read.csv(url("http://whitlockschluter.zoology.ubc.ca/wp-content/data/chapter08/chap08e1DayOfBirth.csv"))
 head(birthDay)
 ```
@@ -1857,7 +1857,7 @@ Each row represents a single birth, and shows the day of the week of birth. Test
 We continue exercise 19 from week 8: 
 As the world warms, the geographic ranges of species  might shift toward cooler areas. Chen et al. (2011) studied recent changes  in the highest elevation of 31 taxa, in meters, over the late 1900s and early 2000s. Positive numbers indicate upward shifts in elevation, and negative numbers indicate shifts to lower elevations. The values are given by:
 
-```{r}
+```{r,fig.margin = TRUE}
 data = c(58.9, 7.8, 108.6, 44.8, 11.1, 19.2, 61.9, 30.5, 12.7, 35.8, 7.4, 39.3, 24.0, 62.1, 24.3, 55.3, 32.7, 65.3, -19.3, 7.6, -5.2, -2.1, 31.0, 69.0, 88.6, 39.5, 20.7, 89.0, 69.0, 64.9, 64.8)
 ```
 
@@ -1960,7 +1960,7 @@ Alternatively, and easier, take a look at the package: _perm_ and the function _
 
 Hints:
 Calculate the diffrence of the means:
-```{r}
+```{r,fig.margin = TRUE}
 no.recycling = c(4,4,4,4,4,4,4,5,8,9,9,9,9,12,12,13,14,14,14,14,15,23)
 recycling = c(4,5,8,8,8,9,9,9,12,14,14,15,16,19,23,28,40,43,129,130)
 
@@ -1976,7 +1976,7 @@ diffMeans =  MeanNR - MeanR
 ```
 
 Calculate difference between means for randomly created groups:
-```{r}
+```{r,fig.margin = TRUE}
 n = 1000 
 permResult <- numeric(n) 
 
@@ -1997,7 +1997,7 @@ Many biological processes display circadian rhythms in activity, which presumabl
 
 iven alternative light treatments. Light treatments were applied to the knees or the eyes, as well as a control group without any treatment. The phase shift in the circadian rhythm of melatonin production was recorded.  You can download the data with this command (original publication DOI: 10.1126/science.1071697):
 
-```{r}
+```{r,fig.margin = TRUE}
 circadian <- read.csv(url("https://whitlockschluter3e.zoology.ubc.ca/Data/chapter15/chap15e1KneesWhoSayNight.csv"), stringsAsFactors = FALSE)
 ```
 
@@ -2010,76 +2010,13 @@ c) If the ANOVA tells you that one of the groups is significantly different from
 d) The original goal of this publication was to replicate findings from an earlier study that showed that light treatment behind the knee can alter your circadian rhythm of melatonin production. The authors replicated the experiment using the same setup and machines, but improved the study design by including a proper control group and using a double-blind experimental design. What did the new study find? Do the new results support the original findings? What can we learn from this?
 
 
-
-
-
-
-#### Solution
-I first change the order of the groups for better comparison:
-```{r}
-
-circadian$treatment <- factor(circadian$treatment, 
-    levels = c("control", "knee", "eyes")) 
-
-```
-
-
-
-The data can be visualized in several different ways and I chose a simple strip chart. This looks nice and has the advantage that we can actually see the raw data.
-
-```{r}
-ggplot(circadian, aes(x = treatment, y = shift)) +
-    geom_point(color = "firebrick", size = 3, shape = 1) +
-    labs(x = "Light treatment", y = "Shift in circadian rhythm (h)") + 
-    theme_classic()
-```
-
-If you want to also include error bars you have already seen many ways to do this, so I use a new one that is relatively elegant:
-
-```{r}
-ggplot(circadian, aes(x = treatment, y = shift)) +
-    geom_point(color = "firebrick", size = 3, shape = 1) +
-    stat_summary(fun.data = mean_se, geom = "errorbar", 
-        colour = "black", width = 0.1, 
-        position=position_nudge(x = 0.15)) +
-    stat_summary(fun.y = mean, geom = "point", 
-        colour = "firebrick", size = 3, 
-        position=position_nudge(x = 0.15)) +
-    labs(x = "Light treatment", y = "Shift in circadian rhythm (h)") + 
-    theme_classic()
-```
-
-b) 
-
-The ANOVA table is made in two steps. The first step involves fitting the ANOVA model to the data using lm() (“lm” stands for “linear model”, of which ANOVA is one type). Then we use the command anova() to assemble the table. 
-
-```{r}
-circadianAnova <- lm(shift ~ treatment, data = circadian)
-anova(circadianAnova)
-```
-
-
-In the ANOVA table we see that the F statistic is quite large and the P value is small. That means that we can reject the null hypothesis that all means are equal for any significance threshold of $0.005$ or higher. We can thus be fairly certain that one of the three groups is different from the others. 
-
-c) It can be seen directly from the visualization of the data that the kne and control group are very similar, whereas the eye group is different from the other two groups. We can also try pairwise t-tests to make this more formal:
-
-```{r}
-pairwise.t.test(circadian$shift,circadian$treatment)
-```
-
-Note that these p-values are automatically adjusted for multiple testing!
-
-d) The results do not confirm the original study's claim that light treatment behind the knee leads to changes  phase shift  melatonin production. Experimental design is important, as is replication of scientific findings. In general it is advised to use a double blind study setup, to make sure there are no biases introduced by the experimenter as well as the subjects of the study. 
-
-
-
 ## Week 14 
 
 ### Exercise 30
 
 Load the following data set: 
 
-```{r} 
+```{r,fig.margin = TRUE} 
 lion <- read.csv(url("http://www.zoology.ubc.ca/~schluter/WhitlockSchluter/wp-content/data/chapter17/chap17e1LionNoses.csv"))
 head(lion) 
 ``` 
