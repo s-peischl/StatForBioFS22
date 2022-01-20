@@ -1460,6 +1460,8 @@ sum(die.2>die.1)/10000
 
 
 # Exercises {.tabset .tabset-pill}
+Exercises can also be found [here](https://s-peischl.github.io/StatForBioFS22/Exercises_web.html)
+or [here](https://s-peischl.github.io/StatForBioFS22/Exercises_web.pdf)
 
 ## Week 1 (23.02.2022) 
 
@@ -2039,5 +2041,7 @@ f) Test if the slope of the model significantly different from 0.
 
 g) Plot the data and add a regression line and a confidence band for the
 regression line.
+
+
 
 
