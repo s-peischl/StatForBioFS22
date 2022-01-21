@@ -67,7 +67,7 @@ scale_colour_discrete <- function(...) {
 # Visualizations with ggplot2 and base R
 
 ## GGplot 2
-We start with some examples of how to visulaize data quickly and easily. This should show you how to produce high quality visulaizations using R and motivate you to learn more about programming and data analysis with R. 
+We start with some examples of how to visualize data quickly and easily. This should show you how to produce high quality visulaizations using R and motivate you to learn more about programming and data analysis with R. 
 
 R has several systems for making graphs, and I have chosen to start with ggplot2 beacuse it is elegant, versatile and is easy to leanr if you have no prior knowledge about programming. For those of you who are already familiar wiht programming langauges, doing graphics in "base R" may seem more intuitive initially but I hope I can convince you that the grammar of plotting used by ggplot has lots of advantages and is very readable once you get the hang of it. 
 
@@ -1462,3 +1462,5 @@ sum(die.2>die.1)/10000
 # Exercises 
 Exercises can be found [here (html)](https://s-peischl.github.io/StatForBioFS22/Exercises_web.html)
 or [here (pdf)](https://s-peischl.github.io/StatForBioFS22/Exercises_web.pdf)
+
+Solutions to the exercises will be posted [here](https://s-peischl.github.io/StatForBioFS22/Solutions.html) each week after the exercise session.
