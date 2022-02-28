@@ -2,7 +2,8 @@
 title: "Exercises for Statistics for Biology - FS 2022"
 author: "Stephan Peischl"
 output:
-  tufte::tufte_handout: default
+  rmdformats::robobook:
+    highlight: tango
   pdf_document:
     df_print: kable
     fig_caption: yes
@@ -11,15 +12,10 @@ output:
     highlight: tango
     number_sections: yes
     toc: yes
-  rmdformats::robobook:
-    gallery: yes
-    highlight: tango
-    lightbox: yes
-    self_contained: yes
-    thumbnails: yes
+  html_document:
     toc: yes
   tufte::tufte_book: default
-  html_document: null
+  tufte::tufte_handout: default
   tufte::tufte_html: default
   word_document:
     toc: yes
@@ -54,9 +50,11 @@ scale_colour_discrete <- function(...)
 
 ```
 
+Solutions to the exercises will be posted [here](https://s-peischl.github.io/StatForBioFS22/Solutions.html) each week after the exercise session. 
 
+[Back to main page.](https://s-peischl.github.io/StatForBioFS22)
 
-# Week 1 (23.02.2022)
+# Week 1 (23.02.2022) {.tabset}
 
 ## Exercise 1
 
@@ -70,10 +68,7 @@ c)	What type of error might be introduced by the sampling method when estimating
 
 ## Exercise 2 
 
-Which of the following numerical variables are continuous? Which
-are discrete? (Note: Discrete variables are those that have a finite set of
-predefined values, whereas continuous variables can take any value within a
-given interval.)
+Which of the following numerical variables are continuous? Which are discrete? (Note: Discrete variables are those that have a finite set of predefined values, whereas continuous variables can take any value within a given interval.)
 
 a)	Number of injuries sustained in a fall
 
@@ -98,13 +93,16 @@ d)	Spinner Hansen et al. (2008) studied a species of spider whose females often 
 e)	Bowen et al. (2012) studied the effects of advanced communication therapy for patients whose communication skills had been affected by previous strokes. They randomly assigned two therapies to stroke patients. One group received advanced communication therapy and the other received only social visits without formal therapy. Both groups otherwise received normal, best-practice care. After six months, the communication ability (as measured by a standardized quantitative test score) was measured on all patients.
 
 ## Exercise 4 
-During World War II, the British Royal Air Force estimated the
-density of bullet holes on different sections of planes returning to base from aerial sorties. Their goal was to use this information to determine which plane sections most needed additional protective shields. (It was not possible to reinforce the whole plane, because it would weigh too much.) They found that the density of holes was highest on the wings and lowest on the engines and near the cockpit, where the pilot sits (their initial conclusion, that therefore the wings should be reinforced, was later shown to be mistaken). What is the main problem with the sample: bias or large sampling error? What part of the plane should have been reinforced?
 
-\begin{marginfigure}
-\includegraphics[width=\linewidth]{AirplaneMissileHits.png}
-\caption{Figure for exercise 4.} 
-\end{marginfigure}
+
+
+During World War II, the British Royal Air Force estimated the density of bullet holes on different sections of planes returning to base from aerial sorties (Fig. 1). 
+```{r, out.width='90%', fig.align='center', fig.cap='Figure for exercise 4.',fig.margin = TRUE,echo=FALSE}
+knitr::include_graphics('AirplaneMissileHits.png')
+```
+Their goal was to use this information to determine which plane sections most needed additional protective shields. (It was not possible to reinforce the whole plane, because it would weigh too much.) They found that the density of holes was highest on the wings and lowest on the engines and near the cockpit, where the pilot sits (their initial conclusion, that therefore the wings should be reinforced, was later shown to be mistaken). What is the main problem with the sample: bias or large sampling error? What part of the plane should have been reinforced?
+
+
 
 
 ## Exercise 5 
@@ -120,7 +118,34 @@ c) Is the number of species in the sample likely to be an unbiased estimate of t
 
 \newpage
 
-# Week 2 (02.03.2022)
+# Week 2 (02.03.2022)  {.tabset}
+In this weeks exercises you can use the following new R commands (use the help function to learn more about them):
+
+```{}
+str
+
+dim
+
+ggplot
+
+geom_point
+
+```
+
+If you want to play around with colors, you can define colors using their RGB values:
+
+```{r}
+col1 = rgb(255/256, 215/256, 0/256)
+col2 = rgb(0/256, 87/256, 183/256)
+
+ggplot() + 
+  geom_rect(aes(xmin = 1, xmax = 3, ymin = 10, ymax = 15),fill = col1) +
+  geom_rect(aes(xmin = 1, xmax = 3, ymin = 15, ymax = 20),fill = col2)
+  
+```
+
+
+
 
 ## Exercise 6 
 We use the MPG data set introduced in the lecture.  Answer the following questions. You can use base R or ggplot if not otherwise specified.
@@ -156,7 +181,7 @@ ggplot(data = mpg)
 
 \newpage
 
-# Week 3 (09.03.2022)
+# Week 3 (09.03.2022)  {.tabset}
 
 ## Exercise 7 
 Load the data set "chap04e1HumanGeneLengths.csv" (the lengh of genes in the human genome, found on ilias) and answer the following questions and provide the R code you used for that. Put all of your analysis in a single R script.
@@ -183,7 +208,7 @@ h)	Display the data using different plotting techniques. Which one illustrates t
 
 \newpage
 
-# Week 4 (16.03.2022)
+# Week 4 (16.03.2022)  {.tabset}
 
 ## Exercise 8 
 Use the stickleback dataset and calcualte the median and mean for each genotpye. Make a histogramm and add vertical lines to the histogramm indicating the mean and median for each genotype. What do you see? How does the shape of the distribution affect differences between mean and median?
@@ -258,17 +283,16 @@ Tip if you get stuck: Have a look at the previous exercise for inspiration ...
 \newpage
 
 \newpage
-# Week 5 (23.03.2022)
+# Week 5 (23.03.2022)  {.tabset}
 
 ## Exercise 10 
 
 The pizza below, ordered from the Venn Pizzeria on Bayes Street, is divided into eight slices.
 
-\begin{marginfigure} 
-\includegraphics[width=\linewidth]{Pizza.png} 
-\caption{Pizza for exercise 10.} 
-\end{marginfigure}
 
+```{r, out.width='90%', fig.align='center', fig.cap='Pizza for exercise 10.',fig.margin = TRUE,echo=FALSE}
+knitr::include_graphics('Pizza.png')
+```
 
 
 Answer the following questions based on the drawing of the pizza:
@@ -334,7 +358,7 @@ b)	What is the probability that at least one does not include the true parameter
 
 
 \newpage
-# Week 6 (30.03.2022)
+# Week 6 (30.03.2022)  {.tabset}
 
 ## Exercsie 13 
 Use the stickleback data set. Calculate a confidence interval for the mean plate numbers for each genotype. Make a plot that shows the mean and the confidence interval of each genotype. Discuss which groups are different and which are not based on your analysis.
@@ -362,7 +386,7 @@ c) Indicate the most extreme 5 percent of the distribution. In other words: For 
 
 
 \newpage
-# Week 7
+# Week 7  {.tabset}
 
 ## Exercise 16 
 Use the stickleback data set.
@@ -434,7 +458,7 @@ d) Can you calculate the probability that you observer a more extreme results th
 
 
 \newpage
-# Week 8
+# Week 8  {.tabset}
 
 ## Exercise 19
 
@@ -481,7 +505,7 @@ i) Can you describe how to calculate a p-value for this test statistic?
 
 
 \newpage
-# Week 9 
+# Week 9  {.tabset} 
 ## Exercise 20  
 Perform a goodness-of-fit test for a data set with two categories. The data file is "chap08e4XGeneContent.csv" and can be found on ilias or online:
 
@@ -518,7 +542,7 @@ Each row represents a single birth, and shows the day of the week of birth. Test
 
 
 
-# Week 10
+# Week 10  {.tabset}
 
 ## Exercise 22 
 
@@ -544,7 +568,7 @@ Use the stickleback data set yet again. Perform a t.test for each comparison of 
 
 \newpage
 
-# Week 11
+# Week 11  {.tabset}
 
 ## Exercise 24 
 
@@ -593,7 +617,7 @@ i) What are the limits of this confidence interval expressed on original (non-lo
 
 
 
-# Week 12
+# Week 12  {.tabset}
 
 ## Exercise 27
 
@@ -650,7 +674,7 @@ Now use a loop to calculate many replicates of the random groupings.
 
 \newpage
 
-# Week 13 
+# Week 13   {.tabset}
 ## Exercise 29 
 Many biological processes display circadian rhythms in activity, which presumably operate to coordinate cellular functions with daily environmental oscillations. Many tissues themselves exhibit circadian rhythms of activity to optimize specific processes which require coordination with the light-dark cycle.  We want to investigate the phase shift in the circadian rhythm of melatonin production in participants given alternative light treatments. Light treatments were applied to the knees or the eyes, as well as a control group without any treatment. The phase shift in the circadian rhythm of melatonin production was recorded.  You can download the data with this command (original publication DOI: 10.1126/science.1071697):
 
@@ -673,7 +697,7 @@ d) The original goal of this publication was to replicate findings from an earli
 \newpage
 
 
-# Week 14
+# Week 14  {.tabset}
 
 ## Exercise 30
 
