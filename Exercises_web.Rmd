@@ -137,12 +137,8 @@ If you want to play around with colors, you can define colors using their RGB va
 ```{r}
 col1 = rgb(255/256, 215/256, 0/256)
 col2 = rgb(0/256, 87/256, 183/256)
-
-ggplot() + 
-  geom_rect(aes(xmin = 1, xmax = 3, ymin = 10, ymax = 15),fill = col1) +
-  geom_rect(aes(xmin = 1, xmax = 3, ymin = 15, ymax = 20),fill = col2)
-  
 ```
+
 
 
 
