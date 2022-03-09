@@ -220,7 +220,8 @@ stickleback$plates[stickleback$genotype=="mm"]
 
 ```
 
-
+More information on how to use these functions can be found here:
+https://s-peischl.github.io/StatForBioFS22/#working-with-data-frames
 
 
 
