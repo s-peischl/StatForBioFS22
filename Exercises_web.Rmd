@@ -179,6 +179,52 @@ ggplot(data = mpg)
 
 # Week 3 (09.03.2022)  {.tabset}
 
+New R commands for loading data sets and calculating descriptive statistics (use the help function to learn more about them):
+
+```{}
+read.csv
+
+sum
+
+mean
+
+median 
+
+var
+
+sd
+```
+
+For plotting you can try:
+
+```{}
+geom_histogram
+
+geom_bar
+
+geom_density
+
+geom_boxplot
+
+facet_wrap
+```
+
+
+Accessing variables in a data frame can be done with $ and []:
+```{r}
+stickleback <- read.csv(url("http://www.zoology.ubc.ca/~schluter/WhitlockSchluter/wp-content/data/chapter03/chap03e3SticklebackPlates.csv"))
+
+stickleback$plates
+
+stickleback$plates[stickleback$genotype=="mm"]
+
+```
+
+
+
+
+
+
 ## Exercise 7 
 Load the data set "chap04e1HumanGeneLengths.csv" (the lengh of genes in the human genome, found on ilias) and answer the following questions and provide the R code you used for that. Put all of your analysis in a single R script.
 
