@@ -251,10 +251,41 @@ h)	Display the data using different plotting techniques. Which one illustrates t
 
 \newpage
 
+
 # Week 4 (16.03.2022)  {.tabset}
 
+New R commands that can be helpful for this week:
+
+- The for loop repeats a block of code several times. In this example the code in the curly brackets is performed 3 times. The code _i in 1:3_ means that the variable _i_ will take the values 1, 2, and 3 in each iteration: 
+```{r}
+for (i in 1:3)
+{
+  print("Value of i:")
+  print(i)
+}
+```
+
+Functions to draw random numbers:
+
+- rnorm 
+- rpois
+etc.
+
+The first parameter is usually how many realizations you want to draw (the sample size) and the other parameters are the parameters of the distribution from which you are drawing:
+```{r}
+rnorm(n = 1,mean = 1, sd = 0)
+```
+This gives you a single realization of a normally distributed random variable with mean 1 and standard deviation 0. 
+
+Functions to get the probability distributions of random variables: 
+
+- dnorm
+- dpois 
+etc.
+
+
 ## Exercise 8 
-Use the stickleback dataset and calcualte the median and mean for each genotpye. Make a histogramm and add vertical lines to the histogramm indicating the mean and median for each genotype. What do you see? How does the shape of the distribution affect differences between mean and median?
+Use the stickleback dataset and calculate the median and mean for each genotpye. Make a histogram and add vertical lines to the histogram indicating the mean and median for each genotype. What do you see? How does the shape of the distribution affect differences between mean and median?
 
 ## Exercise 9 (standard) 
 Copy and paste this R code into a script. Before you run it, try to figure out what it does. Modify the output so that it looks nicer, i.e., add labels, change theme, change colors, ...
@@ -326,6 +357,8 @@ Tip if you get stuck: Have a look at the previous exercise for inspiration ...
 \newpage
 
 \newpage
+
+
 # Week 5 (23.03.2022)  {.tabset}
 
 ## Exercise 10 
