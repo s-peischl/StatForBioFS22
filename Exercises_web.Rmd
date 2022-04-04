@@ -462,25 +462,8 @@ c) Indicate the most extreme 5 percent of the distribution. In other words: For 
 
 
 \newpage
-# Week 7  {.tabset}
-
-## Exercise 16 
-Use the stickleback data set.
-
-a) Compare the distribution of plate numbers to a normal distribution with the same mean and variance. Do this for each genotype separately. Is it justified do assume a normal distribution?
-
-
-
-
-b) Use the function t.test for each genotype to obtain confidence intervals of the mean plate number for each genotype. Compare this with confidence intervals calculated by hand using the 2 SE approxiamtion. Are the results different? If so, can you explain why?
-
-
-
-
-
-
-
-## Exercise 17 
+# Week 7 (06.04.2022) {.tabset}
+## Exercise 16
 Assume that Z is a number randomly chosen from a standard normal distribution. Calculate each of the following probabilities :
 
 a) P(Z > 1.34)
@@ -501,6 +484,42 @@ h) P(-1.57 < Z < - 0.32)
 
 Make a sketch for each case and calculate the values using R functions.
 
+
+## Exercise 17 
+Use the stickleback data set:
+
+```{r}
+stickleback = read.csv("~/Dropbox/Teaching/StatisticsForBiology/chap03e3SticklebackPlates.csv")
+```
+
+
+Remember that you can access different columns in this data frame by using the $ symbol, e.g.:
+```{r}
+stickleback$genotype
+```
+
+If you want to get only specific individuals, e.g. plate number of individuals with a certain genotype, you can use logical operators inside square brackets:
+
+```{r}
+stickleback$plates[stickleback$genotype=="mm"]
+```
+
+
+a) Compare the distribution of plate numbers to a normal distribution with the same mean and variance. Do this for each genotype separately. Is it justified do assume a normal distribution?
+
+
+
+
+b) Use the function t.test for each genotype to obtain confidence intervals of the mean plate number for each genotype. Compare this with confidence intervals calculated by hand using the 2 SE approxiamtion. Are the results different? If so, can you explain why?
+
+
+
+
+
+
+
+
+# Week 8  {.tabset}
 ## Exercise 18 
 Use the data set "chap11e2Stalkies.csv" of  eye span measurements from a sample of stalk-eyed flies:
 
@@ -534,8 +553,6 @@ d) Can you calculate the probability that you observer a more extreme results th
 
 
 \newpage
-# Week 8  {.tabset}
-
 ## Exercise 19
 
 As the world warms, the geographic ranges of species  might shift toward cooler areas. Chen et al. (2011) studied recent changes  in the highest elevation of 31 taxa, in meters, over the late 1900s and early 2000s. Positive numbers indicate upward shifts in elevation, and negative numbers indicate shifts to lower elevations. The values are given by:
