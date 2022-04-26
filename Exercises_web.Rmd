@@ -510,17 +510,46 @@ a) Compare the distribution of plate numbers to a normal distribution with the s
 
 
 
-b) Use the function t.test for each genotype to obtain confidence intervals of the mean plate number for each genotype. Compare this with confidence intervals calculated by hand using the 2 SE approxiamtion. Are the results different? If so, can you explain why?
+b) Use the function t.test for each genotype to obtain confidence intervals of the mean plate number for each genotype. Compare this with confidence intervals calculated by hand using the 2 SE approximation. Are the results different? If so, can you explain why?
 
 
 
 
-
-
-
-
-# Week 8  {.tabset}
+# Week 8 (13.04.2022)  {.tabset}
 ## Exercise 18 
+Perform a goodness-of-fit test for a data set with two categories. The data file is "chap08e4XGeneContent.csv" and can be found on ilias or online:
+
+```{r,fig.margin = TRUE,fig.align='center'} 
+dom = "http://www.zoology.ubc.ca/" 
+path = "~schluter/WhitlockSchluter/wp-content/data/" 
+dat = "chapter08/chap08e4XGeneContent.csv" 
+location = paste(dom,path,dat,sep="") 
+geneContent <- read.csv(url(location)) 
+```
+
+Start by reading and inspecting the data. Each row is a different gene, with its occurrence on the X chromosome indicated.  Then test if the proportion of genes on the X chromosome (among all genes in the genome) is the same as the proportional length of the X chromosome measured in base pairs (among the whole genome). The relative size  of the X chromosome is given by $propX = 1055/20290$ and that of the other chromosomes is $propRest = 19235/20290$.
+
+a) Plot a frequency table showing the number of genes on the X and on other chromosomes.
+
+b) Perform a $\chi^2$ goodness-of-fit test to the proportional model.
+
+c) Draw a conclusion from your test.
+\newpage
+
+## Exercise 19
+Use the following data set: 
+
+```{r,fig.margin = TRUE}
+birthDay <- read.csv(url("http://whitlockschluter.zoology.ubc.ca/wp-content/data/chapter08/chap08e1DayOfBirth.csv"))
+head(birthDay)
+```
+
+The data set gives the day of the week at which babies were born via a cesarean in a hospital. Each row is one birth event. Test the null hypothesis that all weekdays are equally likely - in other words, the proportion of each weekday among all the birthdays is the same for each weekday ( = 1/7). Interpret this result assuming that the distribution of weekdays is uniform for natural births.
+
+
+
+# Week 9  (27.04.2022) {.tabset} 
+## Exercise 20  
 Use the data set "chap11e2Stalkies.csv" of  eye span measurements from a sample of stalk-eyed flies:
 
 
@@ -549,11 +578,7 @@ d) Can you calculate the probability that you observer a more extreme results th
 
 
 
-
-
-
-\newpage
-## Exercise 19
+## Exercise 21
 
 As the world warms, the geographic ranges of species  might shift toward cooler areas. Chen et al. (2011) studied recent changes  in the highest elevation of 31 taxa, in meters, over the late 1900s and early 2000s. Positive numbers indicate upward shifts in elevation, and negative numbers indicate shifts to lower elevations. The values are given by:
 
@@ -598,41 +623,6 @@ i) Can you describe how to calculate a p-value for this test statistic?
 
 
 \newpage
-# Week 9  {.tabset} 
-## Exercise 20  
-Perform a goodness-of-fit test for a data set with two categories. The data file is "chap08e4XGeneContent.csv" and can be found on ilias or online:
-
-```{r,fig.margin = TRUE,fig.align='center'} 
-dom = "http://www.zoology.ubc.ca/" 
-path = "~schluter/WhitlockSchluter/wp-content/data/" 
-dat = "chapter08/chap08e4XGeneContent.csv" 
-location = paste(dom,path,dat,sep="") 
-geneContent <- read.csv(url(location)) 
-```
-
-Start by reading and inspecting the data. Each row is a different gene, with its occurrence on the X chromosome indicated.  Then test if the proportion of genes on the X chromosome (among all genes in the genome) is the same as the proportional length of the X chromosome measured in base pairs (among the whole genome). The relative size  of the X chromosome is given by $propX = 1055/20290$ and that of the other chromosomes is $propRest = 19235/20290$.
-
-a) Plot a frequency table showing the number of genes on the X and on other chromosomes.
-
-b) Perform a $\chi^2$ goodness-of-fit test to the proportional model.
-
-c) Draw a conclusion from your test.
-
-## Exercise 21 
-Load the dataset chap08e1DayOfBirth.csv:
-
-```{r,fig.margin = TRUE,fig.align='center'} 
-
-dom = "http://www.zoology.ubc.ca/" 
-path = "~schluter/WhitlockSchluter/wp-content/data/" 
-dat = "chapter08/chap08e1DayOfBirth.csv" 
-location = paste(dom,path,dat,sep="") 
-birthDay <- read.csv(url(location)) 
-head(birthDay) 
-``` 
-Each row represents a single birth, and shows the day of the week of birth. Test the null hypothesis that birthdays are randomly distributed in the sense that each day occurs with the same probability. Visualize your results and give an interpretation of the test results. Can you come a up with a potential explanation?
-
-
 
 
 # Week 10  {.tabset}
