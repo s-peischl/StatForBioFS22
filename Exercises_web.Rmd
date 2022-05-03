@@ -625,7 +625,7 @@ i) Can you describe how to calculate a p-value for this test statistic?
 \newpage
 
 
-# Week 10  {.tabset}
+# Week 10  (03.05.2022){.tabset}
 
 ## Exercise 22 
 
@@ -655,8 +655,7 @@ Use the stickleback data set yet again. Perform a t.test for each comparison of 
 
 ## Exercise 24 
 
-A forensic pathologist wants to know whether there is a
-difference between the rate of cooling of freshly killed bodies and those which were reheated, to determine whether you can detect an attempt to mislead a coroner about time of death. He tested several mice for their "cooling constant" both when the mouse was originally killed and then after the mouse was re-heated. The data can be found in the file "mouse_cooling.csv" on ilias. Test whether there is any difference in the cooling constants between freshly killed and reheated corpses. Check whether you can use a t-test and justify your decision to use it. If a t-test is not justified, try to use an alternative strategy (e.g., non-parametric test).
+A forensic pathologist wants to know whether there is a difference between the rate of cooling of freshly killed bodies and those which were reheated, to determine whether you can detect an attempt to mislead a coroner about time of death. He tested several mice for their "cooling constant" both when the mouse was originally killed and then after the mouse was re-heated. The data can be found in the file "mouse_cooling.csv" on ilias. Test whether there is any difference in the cooling constants between freshly killed and reheated corpses. Check whether you can use a t-test and justify your decision to use it. If a t-test is not justified, try to use an alternative strategy (e.g., non-parametric test).
 
 
 
