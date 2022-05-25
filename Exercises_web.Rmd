@@ -651,7 +651,7 @@ Use the stickleback data set yet again. Perform a t.test for each comparison of 
 
 \newpage
 
-# Week 11  {.tabset}
+# Week 11 (11.05.2022) {.tabset}
 
 ## Exercise 24 
 
@@ -699,7 +699,7 @@ i) What are the limits of this confidence interval expressed on original (non-lo
 
 
 
-# Week 12  {.tabset}
+# Week 12 (18.05.2022) {.tabset}
 
 ## Exercise 27
 
@@ -756,7 +756,7 @@ Now use a loop to calculate many replicates of the random groupings.
 
 \newpage
 
-# Week 13   {.tabset}
+# Week 13 (25.05.2022)   {.tabset}
 ## Exercise 29 
 Many biological processes display circadian rhythms in activity, which presumably operate to coordinate cellular functions with daily environmental oscillations. Many tissues themselves exhibit circadian rhythms of activity to optimize specific processes which require coordination with the light-dark cycle.  We want to investigate the phase shift in the circadian rhythm of melatonin production in participants given alternative light treatments. Light treatments were applied to the knees or the eyes, as well as a control group without any treatment. The phase shift in the circadian rhythm of melatonin production was recorded.  You can download the data with this command (original publication DOI: 10.1126/science.1071697):
 
@@ -774,12 +774,12 @@ b) Test whether any of the treatments lead to change in the phase shift. Assume 
 
 c) If the ANOVA tells you that one of the groups is significantly different from the others, find out which one and discuss the results.
 
-d) The original goal of this publication was to replicate findings from an earlier study that showed that light treatment behind the knee can alter your circadian rhythm of melatonin production. The authors replicated the experiment using the same setup and machines, but improved the study design by including a proper control group and using a double-blind experimental design. What did the new study find? Do the new results support the original findings? What can we learn from this?
+d) The original goal of this publication was to replicate findings from an earlier study that showed that s. The authors replicated the experiment using the same setup and machines, but improved the study design by including a proper control group and using a double-blind experimental design. What did the new study find? Do the new results support the original findings? What can we learn from this?
 
 \newpage
 
 
-# Week 14  {.tabset}
+# Week 14  (you can continue here if you are done with the exercises from week 13) {.tabset}
 
 ## Exercise 30
 
