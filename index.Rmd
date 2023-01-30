@@ -1,13 +1,9 @@
 ---
-title: "Statistik für Biologie FS 2022"
+title: "Statistik für Biologie FS 2023"
 author: "Stephan Peischl"
 output:
   rmdformats::robobook:
-    gallery: yes
     highlight: tango
-    lightbox: yes
-    self_contained: yes
-    thumbnails: yes
   pdf_document:
     df_print: kable
     fig_caption: yes
@@ -20,6 +16,7 @@ output:
     toc: yes
   tufte::tufte_book: default
   tufte::tufte_handout: default
+  tufte::tufte_html: default
   word_document:
     toc: yes
 ---
@@ -216,7 +213,7 @@ By now you should see that R is very versatile and can be used for much more tha
 ## Loading datasets
 How to we feed R our data? Of course, we can just type it into the console, a bit like in the previous base R graphics example. For large data sets (or rather anythign that is not an eytremely small data set)  this is not practical. We want to load our data from a file, which makes our analysis easily reproducible if we share data and R scripts with someone. First we need to make sure R knows where our working directory is, using the function *setwd* (set working directory):
 ```{r,fig.margin = TRUE,fig.align='center'}
-setwd("/Users/stephan/Dropbox/Teaching/BlogdownPages/StatForBioFS22")
+setwd("/Users/stephan_1/Dropbox/Teaching/BlogdownPages/StatForBioFS22")
 ```
 If you want to check your current working directory, you can do this with *getwd()*.
 
@@ -1011,7 +1008,9 @@ We use a one-sample t-test to compare body temperature in a random sample of peo
 
 Read and inspect the data:
 ```{r,fig.margin = TRUE,fig.align='center'}
-heat <- read.csv(url("http://www.zoology.ubc.ca/~schluter/WhitlockSchluter/wp-content/data/chapter11/chap11e3Temperature.csv"))
+heat <- read.csv("~/Dropbox/Teaching/BlogdownPages/StatisticsForBiology/ABD_all_data/chapter11/chap11e3Temperature.csv")
+
+
 head(heat)
 ```
 
@@ -1041,7 +1040,7 @@ t.test(heat$temperatureC, mu = mu0)
 We compare horn length of live and dead (spiked) horned lizards.
 
 ```{r,fig.margin = TRUE,fig.align='center'}
-lizard <- read.csv(url("http://www.zoology.ubc.ca/~schluter/WhitlockSchluter/wp-content/data/chapter12/chap12e3HornedLizards.csv"))
+lizard <- read_csv("~/Dropbox/Teaching/BlogdownPages/StatisticsForBiology/ABD_all_data/chapter12/chap12e3HornedLizards.csv")
 head(lizard)
 ```
 
@@ -1093,7 +1092,7 @@ We investigate the ratio of biomass between marine reserves and non-reserve cont
 
 
 ```{r,fig.margin = TRUE,fig.align='center'}
-marine <- read.csv(url("http://www.zoology.ubc.ca/~schluter/WhitlockSchluter/wp-content/data/chapter13/chap13e1MarineReserve.csv"))
+marine <- read_csv("~/Dropbox/Teaching/BlogdownPages/StatisticsForBiology/ABD_all_data/chapter13/chap13e1MarineReserve.csv")
 head(marine)
 
 ggplot(data = marine) +

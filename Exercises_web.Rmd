@@ -1,5 +1,5 @@
 --- 
-title: "Exercises for Statistics for Biology - FS 2022"
+title: "Exercises for Statistics for Biology - FS 2023"
 author: "Stephan Peischl"
 output:
   rmdformats::robobook:
