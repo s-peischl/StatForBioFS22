@@ -4,6 +4,7 @@ author: "Stephan Peischl"
 output:
   rmdformats::robobook:
     highlight: tango
+  tufte::tufte_html: default
   pdf_document:
     df_print: kable
     fig_caption: yes
@@ -12,11 +13,10 @@ output:
     highlight: tango
     number_sections: yes
     toc: yes
-  html_document:
-    toc: yes
   tufte::tufte_book: default
   tufte::tufte_handout: default
-  tufte::tufte_html: default
+  html_document:
+    toc: yes
   word_document:
     toc: yes
 ---
@@ -54,7 +54,7 @@ Solutions to the exercises will be posted [here](https://s-peischl.github.io/Sta
 
 [Back to main page.](https://s-peischl.github.io/StatForBioFS22)
 
-# Week 1 (23.02.2022) {.tabset}
+# Week 1 - cancelled, please have a look at the exercises and solutions by yourself - (22.02.2023) {.tabset}
 
 ## Exercise 1
 
@@ -118,7 +118,9 @@ c) Is the number of species in the sample likely to be an unbiased estimate of t
 
 \newpage
 
-# Week 2 (02.03.2022)  {.tabset}
+
+
+# Week 2 (01.03.2023)  {.tabset}
 In this weeks exercises you can use the following new R commands (use the help function to learn more about them):
 
 ```{}
@@ -177,7 +179,7 @@ ggplot(data = mpg)
 
 \newpage
 
-# Week 3 (09.03.2022)  {.tabset}
+# Week 3 (08.03.2023)  {.tabset}
 
 New R commands for loading data sets and calculating descriptive statistics (use the help function to learn more about them):
 
@@ -252,7 +254,7 @@ h)	Display the data using different plotting techniques. Which one illustrates t
 \newpage
 
 
-# Week 4 (16.03.2022)  {.tabset}
+# Week 4 (15.03.2023)  {.tabset}
 
 New R commands that can be helpful for this week:
 
@@ -359,7 +361,7 @@ Tip if you get stuck: Have a look at the previous exercise for inspiration ...
 \newpage
 
 
-# Week 5 (23.03.2022)  {.tabset}
+# Week 5 (22.03.2023)  {.tabset}
 
 ## Exercise 10 
 
@@ -434,7 +436,7 @@ b)	What is the probability that at least one does not include the true parameter
 
 
 \newpage
-# Week 6 (30.03.2022)  {.tabset}
+# Week 6 (29.03.2023)  {.tabset}
 
 ## Exercsie 13 
 Use the stickleback data set. Calculate a confidence interval for the mean plate numbers for each genotype. Make a plot that shows the mean and the confidence interval of each genotype. Discuss which groups are different and which are not based on your analysis.
@@ -462,7 +464,7 @@ c) Indicate the most extreme 5 percent of the distribution. In other words: For 
 
 
 \newpage
-# Week 7 (06.04.2022) {.tabset}
+# Week 7 (05.04.2023) {.tabset}
 ## Exercise 16
 Assume that Z is a number randomly chosen from a standard normal distribution. Calculate each of the following probabilities :
 
@@ -515,7 +517,7 @@ b) Use the function t.test for each genotype to obtain confidence intervals of t
 
 
 
-# Week 8 (13.04.2022)  {.tabset}
+# Week 8 (19.04.2023)  {.tabset}
 ## Exercise 18 
 Perform a goodness-of-fit test for a data set with two categories. The data file is "chap08e4XGeneContent.csv" and can be found on ilias or online:
 
@@ -548,7 +550,7 @@ The data set gives the day of the week at which babies were born via a cesarean 
 
 
 
-# Week 9  (27.04.2022) {.tabset} 
+# Week 9  (26.04.2023) {.tabset} 
 ## Exercise 20  
 Use the data set "chap11e2Stalkies.csv" of  eye span measurements from a sample of stalk-eyed flies:
 
@@ -625,7 +627,7 @@ i) Can you describe how to calculate a p-value for this test statistic?
 \newpage
 
 
-# Week 10  (03.05.2022){.tabset}
+# Week 10  (03.05.2023){.tabset}
 
 ## Exercise 22 
 
@@ -651,7 +653,7 @@ Use the stickleback data set yet again. Perform a t.test for each comparison of 
 
 \newpage
 
-# Week 11 (11.05.2022) {.tabset}
+# Week 11 (10.05.2023) {.tabset}
 
 ## Exercise 24 
 
@@ -699,7 +701,7 @@ i) What are the limits of this confidence interval expressed on original (non-lo
 
 
 
-# Week 12 (18.05.2022) {.tabset}
+# Week 12 (17.05.2023) {.tabset}
 
 ## Exercise 27
 
@@ -756,7 +758,7 @@ Now use a loop to calculate many replicates of the random groupings.
 
 \newpage
 
-# Week 13 (25.05.2022)   {.tabset}
+# Week 13 (24.05.2023)   {.tabset}
 ## Exercise 29 
 Many biological processes display circadian rhythms in activity, which presumably operate to coordinate cellular functions with daily environmental oscillations. Many tissues themselves exhibit circadian rhythms of activity to optimize specific processes which require coordination with the light-dark cycle.  We want to investigate the phase shift in the circadian rhythm of melatonin production in participants given alternative light treatments. Light treatments were applied to the knees or the eyes, as well as a control group without any treatment. The phase shift in the circadian rhythm of melatonin production was recorded.  You can download the data with this command (original publication DOI: 10.1126/science.1071697):
 
